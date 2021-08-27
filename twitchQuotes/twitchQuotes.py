@@ -1,4 +1,3 @@
-from ssl import enum_certificates
 from redbot.core import commands
 import urllib.request
 from random import choice as rnd
