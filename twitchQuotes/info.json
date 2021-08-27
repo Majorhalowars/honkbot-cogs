@@ -1,1 +1,15 @@
-
+{
+    "name": "Twitch Quotes",
+    "author": [
+        "Honk"
+    ],
+    "short": "Quotes the quintessential mind of Horobol.",
+    "description": "Quotes twitch",
+    "install_msg": "Woo, do !quote for some fun",
+    "requirements": [
+    ],
+    "tags": [
+        "random"
+    ],
+    "end_user_data_statement": "This cog does not persistently store data or metadata about users."
+}
