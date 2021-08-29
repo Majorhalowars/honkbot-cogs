@@ -1,6 +1,9 @@
 from redbot.core import commands
-import urllib.request
-from random import choice as rnd
+from io import BytesIO
+
+import aiohttp
+import discord
+from typing import Optional, Union
 
 from PIL import Image
 
