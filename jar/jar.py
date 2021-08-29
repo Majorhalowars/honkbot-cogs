@@ -29,6 +29,19 @@ class jar(commands.Cog):
 
 			jar_img.show()
 
+			temp = BytesIO()
+			jar_img.save(temp, format="PNG")
+			temp.name = "jarred.png"
+
+			jar_img.close()
+			jar_target_img.close()
+
+			temp.seek(0)
+			file = discord.File(temp, filename="jarred.png")
+			temp.close()
+
+			await ctx.send(content=None, file=file)
+
 	
 	async def dl_image(
 		self, url: Union[discord.Asset, discord.Attachment, str]
