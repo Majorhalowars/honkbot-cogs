@@ -1,0 +1,16 @@
+{
+    "name": "Jar",
+    "author": [
+        "Horobol"
+    ],
+    "short": "Stuff something in a jar.",
+    "description": "Get in the jar",
+    "install_msg": "!jar @user or !jar [img_link]",
+    "requirements": [
+        "pillow"
+    ],
+    "tags": [
+        "random"
+    ],
+    "end_user_data_statement": "This cog does not persistently store data or metadata about users."
+}
