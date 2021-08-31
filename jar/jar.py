@@ -1,5 +1,6 @@
 from redbot.core import commands
 from io import BytesIO
+from redbot.core.data_manager import bundled_data_path
 
 import aiohttp
 import discord
@@ -16,7 +17,7 @@ class jar(commands.Cog):
 	@commands.bot_has_permissions(attach_files=True)
 	async def jar(self, ctx, jar_target: str):
 		async with ctx.channel.typing():
-			jar_img = Image.open("data/jar.png")
+			jar_img = Image.open(str(bundled_data_path(self)) + "/jar.png")
 			jar_target_img = Image.open(await self.dl_image(jar_target))
 
 			w_jar, h_jar = jar_img.size
