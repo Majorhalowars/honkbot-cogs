@@ -15,10 +15,10 @@ class jar(commands.Cog):
 
 	@commands.command()
 	@commands.bot_has_permissions(attach_files=True)
-	async def jar(self, ctx, jar_target: str):
+	async def jar(self, ctx, jar_target: Union[discord.Asset, discord.Attachment, str]):
 		async with ctx.channel.typing():
-			jar_img = Image.open(str(bundled_data_path(self)) + "/jar.png")
-			jar_target_img = Image.open(await self.dl_image(jar_target))
+			jar_img = Image.open(str(bundled_data_path(self)) + "/jar.png").convert("RGBA")
+			jar_target_img = Image.open(await self.dl_image(jar_target)).convert("RGBA")
 
 			w_jar, h_jar = jar_img.size
 
