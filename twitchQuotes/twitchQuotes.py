@@ -36,4 +36,4 @@ class twitchQuotes(commands.Cog):
                 await ctx.send(quoteWordSearch)
         else:
                 await ctx.send(rnd(quoteArray))
-        await msg.delete(ctx.message)
+        await ctx.message.delete(ctx.message)
