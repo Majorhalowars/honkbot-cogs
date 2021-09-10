@@ -42,6 +42,7 @@ class jar(commands.Cog):
 			temp.close()
 
 			await ctx.send(content=None, file=file)
+			await self.bot.delete_message(msg)
 
 	
 	async def dl_image(
