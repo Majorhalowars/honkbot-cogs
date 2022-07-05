@@ -32,8 +32,8 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.member(user).all()
         userdata = {
-            "name": "",
-            "description": "",
+            "name": "Name",
+            "description": "Bio",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
