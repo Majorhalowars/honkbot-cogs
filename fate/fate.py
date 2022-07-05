@@ -56,7 +56,7 @@ class fate(commands.Cog):
     async def fudgedice(self,ctx):
         """Rolls 1d3, also known as fudge die!"""
 
-        user = ctx.name
+        user = ctx.author
 
         def die():
             result = randrange(1,4)
@@ -67,4 +67,4 @@ class fate(commands.Cog):
             else:
                 return "`[-]`"
 
-        await ctx.send(user + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+        await ctx.send(str(user) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
