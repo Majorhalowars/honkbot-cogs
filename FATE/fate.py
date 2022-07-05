@@ -1,4 +1,4 @@
-from redbot.core import checks, Config, commands, botsheet
+from redbot.core import checks, Config, commands, bot
 from os.path import exists
 import discord
 
