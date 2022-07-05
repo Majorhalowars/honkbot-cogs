@@ -29,15 +29,15 @@ class fate(commands.Cog):
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
 
-        userdata = await self.config.user(ctx.author).all()
-        userdata = {
+        sheetdata = await self.config.user(ctx.author)
+        await sheetdata.set_raw(
             "name": "Name",
             "description": "Bio",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
             "characterImage": "https://cdn.discordapp.com/attachments/872160747306754058/993805988408868894/unknown.png"
-        }
+        )
         
         await ctx.send("Reset complete!")
 
