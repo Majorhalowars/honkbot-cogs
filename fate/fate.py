@@ -22,7 +22,7 @@ class fate(commands.Cog):
             "characterImage": None
         }
 
-        self.config.register_user(**emptySheet)
+        self.config.register_member(**emptySheet)
 
 
     @commands.command(name="newSheet")
@@ -47,7 +47,7 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet"""
 
-        user = user if user else ctx.author
+        user = ctx.author
         userdata = await self.config.member(user).all()
         mainData = user.description
         sheetDisplay = discord.Embed(color=user.color, title=user.name, description=mainData, image=user.characterImage)
@@ -58,7 +58,7 @@ class fate(commands.Cog):
     async def fudgedice(self,ctx):
         """Rolls 1d3, also known as fudge die!"""
 
-        user = user if user else ctx.author
+        user = ctx.author
         userdata = await self.config.member(user).all()
         thumbnailImage = userdata["characterImage"]
 
