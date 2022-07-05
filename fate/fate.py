@@ -74,4 +74,4 @@ class fate(commands.Cog):
         else:
             rollDisplay.set_author(name=user.name)
 
-        ctx.message(embed=rollDisplay)
+        ctx.send(embed=rollDisplay)
