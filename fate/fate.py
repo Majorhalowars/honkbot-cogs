@@ -52,7 +52,7 @@ class fate(commands.Cog):
         mainData = userdata["characterImage"]
         sheetDisplay = discord.Embed(color=user.color, title=userdata["name"], description=mainData, image=userdata["characterImage"])
 
-        ctx.message(embed=sheetDisplay)
+        ctx.send(embed=sheetDisplay)
 
     @commands.command(name="fateRoll")
     async def fudgedice(self,ctx):
