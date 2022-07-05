@@ -49,8 +49,8 @@ class fate(commands.Cog):
 
         user = ctx.author
         userdata = await self.config.member(user).all()
-        mainData = userdata.characterImage
-        sheetDisplay = discord.Embed(color=user.color, title=userdata[name], description=mainData, image=userdata.characterImage)
+        mainData = userdata["characterImage"]
+        sheetDisplay = discord.Embed(color=user.color, title=userdata["name"], description=mainData, image=userdata["characterImage"])
 
         ctx.message(embed=sheetDisplay)
 
@@ -73,3 +73,5 @@ class fate(commands.Cog):
             rollDisplay.set_thumbnail(url=thumbnailImage)
         else:
             rollDisplay.set_author(name=user.name)
+
+        ctx.message(embed=rollDisplay)
