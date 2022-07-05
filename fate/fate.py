@@ -14,14 +14,16 @@ class fate(commands.Cog):
     async def sheet(self, ctx, sheetJSON: Union[discord.Attachment, str]):
         """Displays the sheet if there's no text, creates/replaces a sheet for the player if a message is provided."""
 
+        user = str(ctx.author)
+
         if sheetJSON == "":
-            if exists(ctx.author + "Sheet.txt"):
+            if exists(user + "Sheet.txt"):
                 await ctx.send("You don't have a sheet, numb nuts! Create one by doing `!fate sheet [json]`")
             else:
-                sheet = open("data/" + ctx.author + "Sheet.txt", "r")
+                sheet = open("data/" + user + "Sheet.txt", "r")
                 await ctx.send(sheet.read())
         else:
-            sheet = open("data/" + ctx.author + "Sheet.txt", "w")
+            sheet = open("data/" + user + "Sheet.txt", "w")
             sheet.write(sheetJSON)
 
-            await ctx.send(open("data/" + ctx.author + "Sheet.txt", "r"))
+            await ctx.send(open("data/" + user + "Sheet.txt", "r"))
