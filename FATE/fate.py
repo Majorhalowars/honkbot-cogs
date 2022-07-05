@@ -1,4 +1,4 @@
-from redbot.core import checks, Config, commands, bot
+from redbot.core import checks, Config, commands, botsheet
 from os.path import exists
 import discord
 
@@ -6,7 +6,7 @@ import discord
 class fate(commands.cog):
 
     def __init__(self, bot):
-		self.bot = bot
+        self.bot = bot
 
     async def sheet(self, ctx, argField: str):
         """Displays the saved sheet if there's no text, creates/replaces a sheet for the player if a message is provided."""
