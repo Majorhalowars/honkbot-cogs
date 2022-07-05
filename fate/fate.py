@@ -56,7 +56,7 @@ class fate(commands.Cog):
     async def fudgedice(self,ctx):
         """Rolls 1d3, also known as fudge die!"""
 
-        user = ctx.author
+        user = ctx.name
 
         def die():
             result = randrange(1,4)
