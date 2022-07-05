@@ -37,11 +37,10 @@ class fate(commands.Cog):
             "characterImage": "gay"
         }
 
-        prevsheet = self.config.user(ctx.author).get_raw()
-
         for key in emptySheet:
-            overwrite = str(emptySheet.get(key))
-            await self.config.user.key.set(overwrite)
+            def overwrite(x):
+                self.config.user.key.set(str(emptySheet.get(x)))
+            await overwrite(key)
         
         await ctx.send("Reset complete!")
 
