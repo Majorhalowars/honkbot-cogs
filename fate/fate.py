@@ -48,7 +48,7 @@ class fate(commands.Cog):
 
         userdata = self.config.user
 
-        await ctx.send(userdata)
+        await ctx.send(userdata.all())
 
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx):
