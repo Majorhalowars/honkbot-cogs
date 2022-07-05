@@ -11,9 +11,6 @@ class fate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-        if not exists("data/"):
-            makedirs("data/")
-
     @commands.command()
     async def sheet(self, ctx, sheetJSON: Union[discord.Attachment, str]):
         """Displays the sheet if there's no text, creates/replaces a sheet for the player if a message is provided."""
