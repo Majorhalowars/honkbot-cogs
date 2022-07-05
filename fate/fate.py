@@ -26,7 +26,7 @@ class fate(commands.Cog):
 
 
     @commands.command(name="newSheet")
-    async def createSheet(self, ctx, sheetJSON: Optional[Union[discord.Attachment, str]] = None):
+    async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
 
         user = ctx.author
@@ -49,8 +49,8 @@ class fate(commands.Cog):
 
         user = ctx.author
         userdata = await self.config.member(user).all()
-        mainData = user.description
-        sheetDisplay = discord.Embed(color=user.color, title=user.name, description=mainData, image=user.characterImage)
+        mainData = userdata[characterImage]
+        sheetDisplay = discord.Embed(color=user.color, title=userdata[name], description=mainData, image=userdata[characterImage])
 
         ctx.message(embed=sheetDisplay)
 
@@ -63,7 +63,7 @@ class fate(commands.Cog):
         thumbnailImage = userdata["characterImage"]
 
         rollDisplay = discord.Embed(title="Rolling 4 fudge die", colour=user.colour)
-        rollDisplay.set_description(randrange(-1,1) + "+" + randrange(-1,1) + "+" + randrange(-1,1) + "+" + randrange(-1,1))
+        rollDisplay.description(randrange(-1,1) + "+" + randrange(-1,1) + "+" + randrange(-1,1) + "+" + randrange(-1,1))
         if user.avatar_url and not thumbnailImage:
             name = str(user)
             name = " ~ ".join((name, user.nick)) if user.nick else name
