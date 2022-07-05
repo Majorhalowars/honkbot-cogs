@@ -14,13 +14,13 @@ class fate(commands.Cog):
         self.config = Config.get_conf(self, identifier=66617465)
 
         emptySheet = {
-            "name": None,
-            "description": None,
+            "name": "",
+            "description": "",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
-            "characterImage": None
-        }
+            "characterImage": ""
+        } 
 
         self.config.register_member(**emptySheet)
 
@@ -31,7 +31,7 @@ class fate(commands.Cog):
 
         user = ctx.author
         userdata = await self.config.member(user).all()
-        userdata = emptySheet = {
+        userdata = {
             "name": "",
             "description": "",
             "skillList": [],
