@@ -62,7 +62,7 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.member(user).all()
         thumbnailImage = userdata["characterImage"]
-        rolls = str(randrange(-1,2)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1))
+        rolls = str(randrange(-1,2)) + "+" + str(randrange(-1,2)) + "+" + str(randrange(-1,2)) + "+" + str(randrange(-1,2))
         rollDisplay = discord.Embed(title="Rolling 4 fudge die", colour=user.colour, description=str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)))
         if user.avatar_url and not thumbnailImage:
             name = str(user)
