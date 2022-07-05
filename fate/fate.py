@@ -14,7 +14,7 @@ class fate(commands.Cog):
     async def sheet(self, ctx, sheetJSON: Union[discord.Attachment, str]):
         """Displays the sheet if there's no text, creates/replaces a sheet for the player if a message is provided."""
 
-        if discord.message.content == "":
+        if sheetJson == "":
             if exists(discord.message.author + "Sheet.txt"):
                 await ctx.send("You don't have a sheet, numb nuts! Create one by doing `!fate sheet [json]`")
             else:
