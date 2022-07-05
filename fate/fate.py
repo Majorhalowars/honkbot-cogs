@@ -8,6 +8,7 @@ class fate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+     @commands.command()
     async def sheet(self, ctx, argField: str):
         """Displays the sheet if there's no text, creates/replaces a sheet for the player if a message is provided."""
 
