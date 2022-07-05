@@ -1,0 +1,9 @@
+{
+  "author": [ "Honk!" ],
+  "install_msg": "Wooo fate loaded",
+  "name": "FATE Sheet manager",
+  "short": "Manages FATE",
+  "description": "Import FATE sheets from my gitpages' json, and play along via discord!",
+  "required_cogs": {},
+  "requirements": []
+}
