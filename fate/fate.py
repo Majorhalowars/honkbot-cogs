@@ -21,7 +21,8 @@ class fate(commands.Cog):
             "stuntList": [],
             "characterImage": None
         }
-        self.config.register_user(self, emptySheet)
+        @staticmethod
+        self.config.register_user(emptySheet)
 
 
     @commands.command(name="newSheet")
