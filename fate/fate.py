@@ -40,9 +40,8 @@ class fate(commands.Cog):
         prevsheet = self.config.user(ctx.author).get_raw()
 
         for key in emptySheet:
-            x = key
-            y = str(emptySheet.get(key))
-            await self.config.user.x.set(y)
+            overwrite = str(emptySheet.get(key))
+            await self.config.user.key.set(overwrite)
         
         await ctx.send("Reset complete!")
 
