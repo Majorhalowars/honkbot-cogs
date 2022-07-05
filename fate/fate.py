@@ -49,8 +49,8 @@ class fate(commands.Cog):
 
         user = ctx.author
         userdata = await self.config.member(user).all()
-        mainData = userdata[characterImage]
-        sheetDisplay = discord.Embed(color=user.color, title=userdata[name], description=mainData, image=userdata[characterImage])
+        mainData = userdata.characterImage
+        sheetDisplay = discord.Embed(color=user.color, title=userdata[name], description=mainData, image=userdata.characterImage)
 
         ctx.message(embed=sheetDisplay)
 
@@ -61,9 +61,8 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.member(user).all()
         thumbnailImage = userdata["characterImage"]
-
-        rollDisplay = discord.Embed(title="Rolling 4 fudge die", colour=user.colour)
-        rollDisplay.description(str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)))
+        rolls = str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1))
+        rollDisplay = discord.Embed(title="Rolling 4 fudge die", colour=user.colour, description=str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)))
         if user.avatar_url and not thumbnailImage:
             name = str(user)
             name = " ~ ".join((name, user.nick)) if user.nick else name
