@@ -21,7 +21,6 @@ class fate(commands.Cog):
             "stuntList": [],
             "characterImage": None
         }
-
         self.config.register_global(emptySheet)
 
 
