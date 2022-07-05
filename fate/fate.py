@@ -22,7 +22,7 @@ class fate(commands.Cog):
             "characterImage": ""
         } 
 
-        self.config.register_member(**emptySheet)
+        self.config.register_global(**emptySheet)
 
 
     @commands.command(name="newSheet")
