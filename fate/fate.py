@@ -29,7 +29,7 @@ class fate(commands.Cog):
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
 
-        userdata = self.config.user
+        userdata = await self.config.user(ctx.author).all()
         userdata = {
             "name": "Name",
             "description": "Bio",
@@ -46,9 +46,9 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet"""
 
-        userdata = self.config.user
+        userdata = await self.config.user(ctx.author).all()
 
-        await ctx.send(userdata.all())
+        await ctx.send(userdata)
 
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx):
@@ -65,4 +65,4 @@ class fate(commands.Cog):
             else:
                 return "`[-]`"
 
-        await ctx.send(str(user) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+        await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
