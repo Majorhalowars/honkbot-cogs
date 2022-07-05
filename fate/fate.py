@@ -29,7 +29,7 @@ class fate(commands.Cog):
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
 
-        userdata = self.config.user.get_raw()
+        userdata = self.config.user
         userdata = {
             "name": "Name",
             "description": "Bio",
@@ -46,7 +46,7 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet"""
 
-        userdata = self.config.user.get_raw()
+        userdata = self.config.user
 
         await ctx.send(userdata)
 
