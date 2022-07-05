@@ -37,7 +37,7 @@ class fate(commands.Cog):
             "characterImage": ""
         }
 
-        await self.config.user(ctx.author).set_raw(emptySheet)
+        await self.config.user(ctx.author).set_raw(self.config.user(ctx.author).all(), emptySheet)
         
         await ctx.send("Reset complete!")
 
