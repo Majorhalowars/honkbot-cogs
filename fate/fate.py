@@ -22,6 +22,6 @@ class fate(commands.Cog):
                 await ctx.send(sheet.read())
         else:
             sheet = open("data/" + discord.message.author + "Sheet.txt", "w")
-            sheet.write(discord.message.attachments)
+            sheet.write(sheetJSON)
 
             await ctx.send(open("data/" + discord.message.author + "Sheet.txt", "r"))
