@@ -30,7 +30,7 @@ class fate(commands.Cog):
         """Wipes your sheet, squeaky clean."""
 
         user = ctx.author
-        userdata = await self.config.user.all()
+        userdata = await self.config.user
         userdata = {
             "name": "Name",
             "description": "Bio",
@@ -48,7 +48,7 @@ class fate(commands.Cog):
         """Displays your current sheet"""
 
         user = ctx.author
-        userdata = await self.config.user.all()
+        userdata = await self.config.user
 
         await ctx.send(userdata)
 
