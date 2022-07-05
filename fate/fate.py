@@ -29,15 +29,20 @@ class fate(commands.Cog):
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
         emptySheet = {
-            "name": "",
-            "description": "",
+            "name": "sati",
+            "description": "wow",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
-            "characterImage": ""
+            "characterImage": "gay"
         }
 
-        await self.config.user(ctx.author).set_raw(self.config.user(ctx.author).all(), emptySheet)
+        prevsheet = self.config.user(ctx.author).get_raw()
+
+        for key in emptySheet:
+            x = key
+            y = str(emptySheet.get(key))
+            await self.config.user.x.set(y)
         
         await ctx.send("Reset complete!")
 
