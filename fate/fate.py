@@ -49,30 +49,22 @@ class fate(commands.Cog):
 
         user = ctx.author
         userdata = await self.config.member(user).all()
-        mainData = userdata["description"]
-        sheetDisplay = discord.Embed(color=user.color, title=userdata["name"], description=f'mainData')
-        sheetDisplay.set_thumbnail(url=userdata["characterImage"])
 
-        await ctx.send(embed=sheetDisplay)
+        await ctx.send(userdata)
 
     @commands.command(name="fateRoll")
     async def fudgedice(self,ctx):
         """Rolls 1d3, also known as fudge die!"""
 
         user = ctx.author
-        userdata = await self.config.member(user).all()
-        thumbnailImage = userdata["characterImage"]
-        rolls = str(randrange(-1,2)) + "+" + str(randrange(-1,2)) + "+" + str(randrange(-1,2)) + "+" + str(randrange(-1,2))
-        rollDisplay = discord.Embed(title="Rolling 4 fudge die", colour=user.colour, description=str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)) + "+" + str(randrange(-1,1)))
-        if user.avatar_url and not thumbnailImage:
-            name = str(user)
-            name = " ~ ".join((name, user.nick)) if user.nick else name
-            rollDisplay.set_author(name=name, url=user.avatar_url)
-            rollDisplay.set_thumbnail(url=user.avatar_url)
-        elif thumbnailImage:
-            rollDisplay.set_author(name=user.name, url=user.avatar_url)
-            rollDisplay.set_thumbnail(url=thumbnailImage)
-        else:
-            rollDisplay.set_author(name=user.name)
 
-        await ctx.send(embed=rollDisplay)
+        def die():
+            result = randrange(1,4)
+            if result == 3:
+                return "`[+]`"
+            elif result == 2:
+                return "`[ ]`"
+            else:
+                return "`[-]`"
+
+        await ctx.send(user + " Rolled: " + die() + " " + die() + " " + die() + " " + die())

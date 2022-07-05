@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\fate",
+    "\\jar",
+    "\\twitchQuotes"
   ],
-  "SelectedNode": "\\C:\\Users\\User\\Source\\Repos\\honkbot-cogs",
+  "SelectedNode": "\\fate\\info.json",
   "PreviewInSolutionExplorer": false
 }
