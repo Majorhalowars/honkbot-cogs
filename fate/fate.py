@@ -39,7 +39,7 @@ class fate(commands.Cog):
 
         for key in emptySheet:
             def overwrite(x):
-                self.config.user.str(key).set(str(emptySheet.get(x)))
+                self.config.user.[key].set(str(emptySheet.get(x)))
             await overwrite(key)
         
         await ctx.send("Reset complete!")
