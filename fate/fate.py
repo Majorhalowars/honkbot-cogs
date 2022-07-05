@@ -28,8 +28,6 @@ class fate(commands.Cog):
     @commands.command(name="newSheet")
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
-
-        sheetdata = await self.config.user(ctx.author)
         emptySheet = {
             "name": "",
             "description": "",
@@ -39,7 +37,7 @@ class fate(commands.Cog):
             "characterImage": ""
         }
 
-        await sheetdata.set_raw(emptySheet)
+        await self.config.user(ctx.author).set_raw(emptySheet)
         
         await ctx.send("Reset complete!")
 
