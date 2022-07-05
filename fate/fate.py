@@ -50,7 +50,7 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.member(user).all()
         mainData = userdata["description"]
-        sheetDisplay = discord.Embed(color=user.color, title=userdata["name"], description=mainData)
+        sheetDisplay = discord.Embed(color=user.color, title=userdata["name"], description=f'mainData')
         sheetDisplay.set_thumbnail(url=userdata["characterImage"])
 
         await ctx.send(embed=sheetDisplay)
