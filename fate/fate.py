@@ -30,14 +30,16 @@ class fate(commands.Cog):
         """Wipes your sheet, squeaky clean."""
 
         sheetdata = await self.config.user(ctx.author)
-        await sheetdata.set_raw(
-            "name": "Name",
-            "description": "Bio",
+        emptySheet = {
+            "name": "",
+            "description": "",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
-            "characterImage": "https://cdn.discordapp.com/attachments/872160747306754058/993805988408868894/unknown.png"
-        )
+            "characterImage": ""
+        }
+
+        await sheetdata.set_raw(emptySheet)
         
         await ctx.send("Reset complete!")
 
