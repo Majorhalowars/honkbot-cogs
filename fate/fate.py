@@ -109,7 +109,7 @@ class fate(commands.Cog):
         file = bytes(file, 'utf-8')
 
         importedJson = ast.literal_eval(file.decode('utf-8'))
-        ctx.send(str(importedJson))
+        await ctx.send(importedJson + "of type" + type(importedJson))
         #userdata = await self.config.user(ctx.author).all()
 
         #for key in userdata:  
