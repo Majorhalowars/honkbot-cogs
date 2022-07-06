@@ -66,7 +66,7 @@ class fate(commands.Cog):
         embedStuntList = ""
         tempSkillList = {}
         for skill in skillList:
-            tempSkillList = tempSkillList.appent(skill)
+            tempSkillList = tempSkillList.append(skill)
 
         sortedSkills=dict(sorted(tempSkillList.items(),key= lambda x:x[1]))
 
