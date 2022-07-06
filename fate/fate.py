@@ -53,21 +53,6 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
         await ctx.send("Reset complete!")
-
-    @commands.command(name="importsheet")
-    async def importsheet(self, ctx, *, importedJson):
-        """Imports the export from the site!"""
-        await ctx.send(str(type(importedJson)))
-        importedJson = ast.literal_eval(importedJson)
-        userdata = await self.config.user(ctx.author).all()
-
-        for key in userdata:  
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata[key] = importedJson.get(key)
-            await ctx.send(str(key) + ": " + str(userdata.get(key)))
-        userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
-        await ctx.send("Sheet Imported!")
     
     @commands.command(name="sheet")
     async def sheet(self, ctx):
@@ -94,42 +79,17 @@ class fate(commands.Cog):
 
         await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
 
-    @commands.command(name="attachment")
-    async def messagetxt(self,ctx):
-        if not ctx.message.attachments:
-            return await ctx.send("No file found!" + ctx.message.contents)
-
-        file = ctx.message.attachments[0]
-        file_name = file.filename.lower()
-        if not file_name.endswith((".txt")):
-            return await ctx.send("Must be a .txt file!")
-
-        file = await file.read()
-        file = str(file).replace("\\r\\n", "")
-        file = bytes(file, 'utf-8')
-
-        importedJson = ast.literal_eval(file.decode('utf-8'))
-        importedJson = importedJson.decode('utf-8')
-        importedJson = ast.literal_eval(importedJson)
-
-        userdata = await self.config.user(ctx.author).all()
-
-        for key in userdata:  
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata[key] = importedJson.get(key)
-            await ctx.send(str(key) + ": " + str(userdata.get(key)))
-        userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
-        await ctx.send("Sheet Imported!")
-
-    @commands.command(name="completeimport")
+    @commands.command(name="importsheear")
     async def completeimport(self, ctx, *, importedJson: Optional[str] = ""):
         """Imports the export from the site!"""
 
         if not ctx.message.attachments and importedJson == "":
             return await ctx.send("No file or text found!")
         if importedJson != "":
-            importedJson = ast.literal_eval(importedJson)
+            if not str(f'"name":') in importedJson:
+                return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
+            else:
+                importedJson = ast.literal_eval(importedJson)
         if ctx.message.attachments:
             file = ctx.message.attachments[0]
             file_name = file.filename.lower()
