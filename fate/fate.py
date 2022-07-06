@@ -56,11 +56,8 @@ class fate(commands.Cog):
         await ctx.send("Reset complete!")
 
     @commands.command(name="importsheet")
-    async def importsheet(self, ctx, importedJson: Union[discord.Attachment, str]):
+    async def importsheet(self, ctx, importedJson: Union[str, dict]):
         """Imports the export from the site!"""
-        
-        if not isinstance(importedJson, str):
-                importedJson = importedJson.read()
         
         importedJson = json.loads(importedJson)
 
