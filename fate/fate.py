@@ -22,7 +22,7 @@ class fate(commands.Cog):
             "characterImage": ""
         } 
 
-        self.config.register_global(**emptySheet)
+        self.config.register_user(**emptySheet)
 
 
     @commands.command(name="newSheet")
@@ -43,10 +43,12 @@ class fate(commands.Cog):
         for key in userdata:
             def overwrite(x):
                 newValue = emptySheet.get(x)
-                self.config.user(ctx.author).set_raw(x, value=newValue)
-            await ctx.send(str(key) + str(userdata.get(key)))
+                self.config.user(ctx.author).set_raw(x, value="wow")
+
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))    
             overwrite(key)
-            await ctx.send(str(key) + str(emptySheet.get(key)))
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))
+
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
         await ctx.send("Reset complete!")
