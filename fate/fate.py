@@ -1,4 +1,3 @@
-from email import message
 from logging.config import IDENTIFIER
 import string
 from redbot.core import checks, Config, commands, bot
@@ -56,18 +55,22 @@ class fate(commands.Cog):
         await ctx.send("Reset complete!")
 
     @commands.command(name="importsheet")
-    async def importsheet(self, ctx, messageText: Optional[str] = None):
+    async def importsheet(self, ctx, importedJson: Optional[str] = None):
         """Imports the export from the site!"""
 
-        if not ctx.message.attachments and messageText == None:
-            return await ctx.send("No text/file found!")
-        
-        importedJson = messageText
+        if ctx.message.attachments:
+            file = ctx.message.attachments[0]
+            file_name = file.filename.lower()
+            if not file_name.endswith((".txt")):
+                return await ctx.send("Must be a .txt file!")
 
+            file = await file.read()
+            importedJson = str(file).replace("\\r\\n", "")
         
-
+        peepers = str({  "name": "The Dude",  "description": "A really cool bio",  "characterImage": "https://media.discordapp.net/attachments/848348285626351686/993363797857271868/photo_2022-06-05_05-20-10.jpg?width=805\u0026height=702",  "skillList": [    {      "skillName": "Skill1",      "skillLevel": 0    },    {      "skillName": "Skill2",      "skillLevel": 1    },    {      "skillName": "Skill3",      "skillLevel": 2    },    {      "skillName": "Skill4",      "skillLevel": 3    }  ],  "aspectList": [    {      "aspectName": "Aspect 1",      "aspectDescription": "Aspect 1 desc"    },    {      "aspectName": "Aspect 2",      "aspectDescription": "Aspect 2 desc"    }  ],  "stuntList": [    {      "stuntName": "Stunt1",      "stuntDescription": "Stunt1 desc"    },    {      "stuntName": "Stunt2",      "stuntDescription": "Stunt 2 desc"    }  ]})
+        importedJson = peepers
         importedJson = ast.literal_eval(importedJson)
-
+        
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:  
