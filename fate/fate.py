@@ -57,7 +57,7 @@ class fate(commands.Cog):
     @commands.command(name="importsheet")
     async def importsheet(self, ctx, *, importedJson):
         """Imports the export from the site!"""
-
+        await ctx.send(str(type(importedJson)))
         importedJson = ast.literal_eval(importedJson)
         userdata = await self.config.user(ctx.author).all()
 
@@ -153,6 +153,6 @@ class fate(commands.Cog):
                 userdata[key] = importedJson.get(key)
             await ctx.send(str(key) + ": " + str(userdata.get(key)))
         userdata = await self.config.user(ctx.author).all()
-        
+
         await ctx.send(userdata)
         await ctx.send("Sheet Imported!")
