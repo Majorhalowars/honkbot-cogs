@@ -66,8 +66,9 @@ class fate(commands.Cog):
         embedStuntList = ""
         
         await ctx.send(str(skillList))
-        await ctx.send(str(type(skillList)))  
-        sortedSkills = skillList.sort(key=lambda item: item.get("skillLevel"))
+        await ctx.send(str(type(skillList))) 
+
+        sortedSkills = skillList["skillClass"].sort(key=lambda item: item.get("skillLevel"))
         
         await ctx.send(str(sortedSkills))
         return await ctx.send(str(type(sortedSkills)))
