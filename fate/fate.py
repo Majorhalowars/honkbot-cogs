@@ -60,7 +60,7 @@ class fate(commands.Cog):
         """Imports the export from the site!"""
         
         peepers = str({  "name": "The Dude",  "description": "A really cool bio",  "characterImage": "https://media.discordapp.net/attachments/848348285626351686/993363797857271868/photo_2022-06-05_05-20-10.jpg?width=805\u0026height=702",  "skillList": [    {      "skillName": "Skill1",      "skillLevel": 0    },    {      "skillName": "Skill2",      "skillLevel": 1    },    {      "skillName": "Skill3",      "skillLevel": 2    },    {      "skillName": "Skill4",      "skillLevel": 3    }  ],  "aspectList": [    {      "aspectName": "Aspect 1",      "aspectDescription": "Aspect 1 desc"    },    {      "aspectName": "Aspect 2",      "aspectDescription": "Aspect 2 desc"    }  ],  "stuntList": [    {      "stuntName": "Stunt1",      "stuntDescription": "Stunt1 desc"    },    {      "stuntName": "Stunt2",      "stuntDescription": "Stunt 2 desc"    }  ]})
-        importedJson = json.loads(peepers)
+        importedJson = peepers
 
         userdata = await self.config.user(ctx.author).all()
 
