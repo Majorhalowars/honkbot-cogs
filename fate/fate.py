@@ -56,7 +56,7 @@ class fate(commands.Cog):
         await ctx.send("Reset complete!")
 
     @commands.command(name="importsheet")
-    async def importsheet(self, ctx, *, messageText: Optional[str] = None):
+    async def importsheet(self, ctx, messageText: Optional[str] = None):
         """Imports the export from the site!"""
 
         if not ctx.message.attachments and messageText == None:
