@@ -107,4 +107,15 @@ class fate(commands.Cog):
 
         file = await file.read()
         file = str(file).replace("\\r\\n", "")
-        return await ctx.send(file)
+
+        importedJson = ast.literal_eval(file)
+
+        userdata = await self.config.user(ctx.author).all()
+
+        for key in userdata:  
+            async with self.config.user(ctx.message.author).all() as userdata:
+                userdata[key] = importedJson.get(key)
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))
+        userdata = await self.config.user(ctx.author).all()
+        await ctx.send(userdata)
+        await ctx.send("Sheet Imported!")
