@@ -60,8 +60,8 @@ class fate(commands.Cog):
 
         def createAspectList():
             for aspect in aspectList:
-                return f'\n{(aspect["aspectName"])}'
-                
+                return str("\n" + aspect["aspectName"])
+
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
         sheetEmbed = discord.Embed(description=f'Aspects--{createAspectList()}\nSkills--\ngo here\nStunts--\ngo here',colour=ctx.author.color)
