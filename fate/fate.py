@@ -76,8 +76,8 @@ class fate(commands.Cog):
         sheetEmbed.set_author(name=f'{userdata["name"]}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
         sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=True)
-        sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
-        sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=False)
+        #sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
+        #sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=False)
         await ctx.send(embed=sheetEmbed)
 
         
