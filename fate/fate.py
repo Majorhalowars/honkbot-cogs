@@ -64,7 +64,7 @@ class fate(commands.Cog):
         embedStuntList = ""
 
         for aspect in aspectList:
-            embedAspectList.append(str("\n" + aspect["aspectName"]))
+            embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
