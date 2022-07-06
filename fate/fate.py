@@ -64,7 +64,8 @@ class fate(commands.Cog):
         embedAspectList = ""
         embedSkillList = ""
         embedStuntList = ""
-        sortedSkills=dict(sorted(dict(skillList.items(),key= lambda x:x[1])))
+        tempSkillList = dict(skill["skillName"], skill["skillLevel"])
+        sortedSkills=dict(sorted(tempSkillList.items(),key= lambda x:x[1]))
 
         for aspect in aspectList:
             embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
