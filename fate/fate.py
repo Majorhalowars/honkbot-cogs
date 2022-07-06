@@ -60,8 +60,9 @@ class fate(commands.Cog):
 
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
-        sheetEmbed = discord.Embed(description=f'"Aspects--\ngo here\nSkills--\ngo here\nStunts--\ngo here"',thumbnail=f'{userdata["characterImage"]}',colour=ctx.author.color)
-        sheetEmbed.set_author(name=f'{userdata["name"]}',)
+        sheetEmbed = discord.Embed(description=f'Aspects--\ngo here\nSkills--\ngo here\nStunts--\ngo here',colour=ctx.author.color)
+        sheetEmbed.set_author(name=f'{userdata["name"]}')
+        sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
         await ctx.send(embed=sheetEmbed)
 
         for aspect in aspectList:
