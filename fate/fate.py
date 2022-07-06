@@ -1,3 +1,4 @@
+from email import message
 from logging.config import IDENTIFIER
 import string
 from redbot.core import checks, Config, commands, bot
@@ -55,8 +56,22 @@ class fate(commands.Cog):
         await ctx.send("Reset complete!")
 
     @commands.command(name="importsheet")
-    async def importsheet(self, ctx, *, importedJson):
+    async def importsheet(self, ctx, *, messageText: Optional[str] = None):
         """Imports the export from the site!"""
+
+        if not ctx.message.attachments and messageText == None:
+            return await ctx.send("No text/file found!")
+        
+        importedJson = messageText
+
+        if ctx.message.attachments:
+            file = ctx.message.attachments[0]
+            file_name = file.filename.lower()
+            if not file_name.endswith((".txt")):
+                return await ctx.send("Must be a .txt file!")
+
+            file = await file.read()
+            importedJson = str(file).replace("\\r\\n", "")
 
         importedJson = ast.literal_eval(importedJson)
 
@@ -96,17 +111,3 @@ class fate(commands.Cog):
                 return "`[-]`"
 
         await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
-
-    @commands.command(name="attachment")
-    async def messagetxt(self,ctx):
-        if not ctx.message.attachments:
-            return await ctx.send("No file found!")
-
-        file = ctx.message.attachments[0]
-        file_name = file.filename.lower()
-        if not file_name.endswith((".txt")):
-            return await ctx.send("Must be a .txt file!")
-
-        file = await file.read()
-        file = str(file).replace("\\r\\n", "")
-        return await ctx.send(file)
