@@ -58,6 +58,10 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet"""
 
+        def createAspectList():
+            for aspect in aspectList:
+                return f'\n{(aspect["aspectName"])}'
+                
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
         sheetEmbed = discord.Embed(description=f'Aspects--{createAspectList()}\nSkills--\ngo here\nStunts--\ngo here',colour=ctx.author.color)
@@ -65,9 +69,7 @@ class fate(commands.Cog):
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
         await ctx.send(embed=sheetEmbed)
 
-        def createAspectList():
-            for aspect in aspectList:
-                return f'\n{(aspect["aspectName"])}'
+        
 
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx):
