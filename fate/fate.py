@@ -108,5 +108,5 @@ class fate(commands.Cog):
             return await ctx.send("Must be a .txt file!")
 
         file = await file.read()
-        file = file.replace("\r\n", "")
-        return await ctx.send(str(file))
+        file = str(file.replace("\r\n", ""))
+        return await ctx.send(file)
