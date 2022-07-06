@@ -3,6 +3,7 @@ import string
 from redbot.core import checks, Config, commands, bot
 from os.path import exists
 import discord
+import json
 from random import randrange
 
 from typing import Optional, Union
@@ -61,6 +62,8 @@ class fate(commands.Cog):
         if not isinstance(importedJson, str):
                 importedJson = importedJson.read()
         
+        importedJson = json.loads(importedJson)
+
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:  
