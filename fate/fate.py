@@ -46,7 +46,7 @@ class fate(commands.Cog):
             await ctx.send(str(key) + str(userdata.get(key)))
             overwrite(key)
             await ctx.send(str(key) + str(emptySheet.get(key)))
-        self.config.user(ctx.author).set(userdata)
+        self.config.user(ctx.author).set(self, userdata)
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
         await ctx.send("Reset complete!")
