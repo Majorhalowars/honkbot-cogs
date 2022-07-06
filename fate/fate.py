@@ -128,8 +128,9 @@ class fate(commands.Cog):
 
         if not ctx.message.attachments and importedJson == "":
             return await ctx.send("No file or text found!")
-        elif importedJson != "":
-            importedJson = ast.literal_eval(f'importedJson')
+        if importedJson != "":
+            importedJson = str(importedJson)
+            importedJson = ast.literal_eval(importedJson)
         if ctx.message.attachments:
             file = ctx.message.attachments[0]
             file_name = file.filename.lower()
