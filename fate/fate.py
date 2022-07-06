@@ -25,17 +25,17 @@ class fate(commands.Cog):
         self.config.register_user(**emptySheet)
 
 
-    @commands.command(name="newSheet")
-    async def createSheet(self, ctx):
+    @commands.command(name="clearsheet")
+    async def wipeSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
         
         emptySheet = {
-            "name": "sati",
-            "description": "wow",
+            "name": "",
+            "description": "",
             "skillList": [],
             "aspectList": [],
             "stuntList": [],
-            "characterImage": "image url"
+            "characterImage": ""
         }
         
         userdata = await self.config.user(ctx.author).all()
@@ -53,6 +53,24 @@ class fate(commands.Cog):
         await ctx.send(userdata)
         await ctx.send("Reset complete!")
 
+    @commands.command(name="importsheet")
+    async def wipeSheet(self, ctx, importedJson: Union[discord.attachment, str]):
+        """Imports the export from the site!"""
+        
+        if importedJson is discord.attachment:
+                importedJson = importedJson.read()
+        
+        userdata = await self.config.user(ctx.author).all()
+
+        for key in userdata:  
+            async with self.config.user(ctx.message.author).all() as userdata:
+                userdata[key] = importedJson.get(key)
+
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))
+
+        userdata = await self.config.user(ctx.author).all()
+        await ctx.send(userdata)
+        await ctx.send("Sheet Imported!")
     
     @commands.command(name="sheet")
     async def sheet(self, ctx):
