@@ -64,14 +64,7 @@ class fate(commands.Cog):
         
         importedJson = messageText
 
-        if ctx.message.attachments:
-            file = ctx.message.attachments[0]
-            file_name = file.filename.lower()
-            if not file_name.endswith((".txt")):
-                return await ctx.send("Must be a .txt file!")
-
-            file = await file.read()
-            importedJson = str(file).replace("\\r\\n", "")
+        
 
         importedJson = ast.literal_eval(importedJson)
 
