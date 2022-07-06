@@ -58,7 +58,9 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet"""
 
-        userdata = await self.config.user(ctx.author).all()
+        userdata = await self.config.user(ctx.author)
+        name = userdata.name()
+        ctx.send(name)
 
         await ctx.send(userdata)
 
@@ -79,7 +81,7 @@ class fate(commands.Cog):
 
         await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
 
-    @commands.command(name="importsheear")
+    @commands.command(name="importsheet")
     async def completeimport(self, ctx, *, importedJson: Optional[str] = ""):
         """Imports the export from the site!"""
 
