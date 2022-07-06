@@ -1,4 +1,5 @@
 from logging.config import IDENTIFIER
+import string
 from redbot.core import checks, Config, commands, bot
 from os.path import exists
 import discord
@@ -57,7 +58,7 @@ class fate(commands.Cog):
     async def wipeSheet(self, ctx, importedJson: Union[discord.attachment, str]):
         """Imports the export from the site!"""
         
-        if importedJson is discord.attachment:
+        if not isinstance(importedJson, string):
                 importedJson = importedJson.read()
         
         userdata = await self.config.user(ctx.author).all()
