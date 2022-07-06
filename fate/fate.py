@@ -58,6 +58,8 @@ class fate(commands.Cog):
     @commands.command(name="importsheet")
     async def importsheet(self, ctx, *, importedJson):
         """Imports the export from the site!"""
+        
+        importedJson = json.loads(importedJson)
 
         userdata = await self.config.user(ctx.author).all()
 
