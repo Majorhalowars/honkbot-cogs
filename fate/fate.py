@@ -59,17 +59,25 @@ class fate(commands.Cog):
         """Displays your current sheet"""
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
+        stuntList = userdata["stuntList"]
+        skillList = userdata["skillList"]
         embedAspectList = ""
         embedSkillList = ""
         embedStuntList = ""
 
         for aspect in aspectList:
             embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
+        for stunt in stuntList:
+            embedStuntList = embedStuntList + (str("\n" + stunt["stuntName"]))
+        for skill in skillList:
+            embedStuntList = embedStuntList + (str("\n" + skill["skillName"] + ": " + skill["skillLevel"]))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
         sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=True)
+        sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
+        sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=False)
         await ctx.send(embed=sheetEmbed)
 
         
