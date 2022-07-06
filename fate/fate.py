@@ -59,8 +59,9 @@ class fate(commands.Cog):
         """Displays your current sheet"""
 
         userdata = await self.config.user(ctx.author).all()
-        name = userdata["name"]
-        await ctx.send(name)
+        aspectList = userdata["aspectList"]
+        for aspectName in aspectList:
+            await ctx.send(aspectName)
 
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx):
