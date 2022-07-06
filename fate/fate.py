@@ -58,7 +58,7 @@ class fate(commands.Cog):
     async def importsheet(self, ctx, importedJson: Union[discord.Attachment, str]):
         """Imports the export from the site!"""
         
-        if not isinstance(importedJson, string):
+        if not isinstance(importedJson, str):
                 importedJson = importedJson.read()
         
         userdata = await self.config.user(ctx.author).all()
