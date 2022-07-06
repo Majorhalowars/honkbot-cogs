@@ -45,7 +45,7 @@ class fate(commands.Cog):
             await ctx.send(str(key) + ": " + str(userdata.get(key)))    
  
             async with userdata as sheet:
-                sheet[emptySheet.get(key)]
+                sheet[key] = emptySheet.get(key)
 
             await ctx.send(str(key) + ": " + str(userdata.get(key)))
 
