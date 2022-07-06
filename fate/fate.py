@@ -111,14 +111,14 @@ class fate(commands.Cog):
         importedJson = ast.literal_eval(file.decode('utf-8'))
         importedJson = importedJson.decode('utf-8')
         importedJson = ast.literal_eval(importedJson)
-        
-        await ctx.send(str(importedJson) + "of type" + str(type(importedJson)))
-        #userdata = await self.config.user(ctx.author).all()
 
-        #for key in userdata:  
-            #async with self.config.user(ctx.message.author).all() as userdata:
-                #userdata[key] = importedJson.get(key)
-            #await ctx.send(str(key) + ": " + str(userdata.get(key)))
-        #userdata = await self.config.user(ctx.author).all()
-        #await ctx.send(userdata)
-        #await ctx.send("Sheet Imported!")
+        await ctx.send(str(importedJson) + "of type" + str(type(importedJson)))
+        userdata = await self.config.user(ctx.author).all()
+
+        for key in userdata:  
+            async with self.config.user(ctx.message.author).all() as userdata:
+                userdata[key] = importedJson.get(key)
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))
+        userdata = await self.config.user(ctx.author).all()
+        await ctx.send(userdata)
+        await ctx.send("Sheet Imported!")
