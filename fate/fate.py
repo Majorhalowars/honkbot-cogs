@@ -64,14 +64,14 @@ class fate(commands.Cog):
         embedAspectList = ""
         embedSkillList = ""
         embedStuntList = ""
-        sortedSkills=dict(sorted(dict(skillList).items(),key= lambda x:x[1]))
+        sortedSkills=dict(sorted(dict(skillList.items(),key= lambda x:x[1])))
 
         for aspect in aspectList:
             embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
         for stunt in stuntList:
             embedStuntList = embedStuntList + (str("\n" + stunt["stuntName"]))
         for skill in sortedSkills:
-            embedSkillList = embedSkillList + (str("\n" + skill[1] + ": " + str(skill[2])))
+            embedSkillList = embedSkillList + (str("\n" + skill["skillName"] + ": " + str(skill["skillLevel"])))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
