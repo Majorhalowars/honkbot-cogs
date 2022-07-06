@@ -37,7 +37,7 @@ class fate(commands.Cog):
             "stuntList": [],
             "characterImage": "image url"
         }
-
+        
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:
@@ -47,7 +47,7 @@ class fate(commands.Cog):
             await ctx.send(str(key) + str(userdata.get(key)))
             overwrite(key)
             await ctx.send(str(key) + str(emptySheet.get(key)))
-        self.config.user(ctx.author).all.set(userdata)
+        self.config.user(ctx.author).set_raw(userdata)
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
         await ctx.send("Reset complete!")
