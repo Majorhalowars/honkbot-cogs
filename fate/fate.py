@@ -43,7 +43,7 @@ class fate(commands.Cog):
         for key in userdata:
             def overwrite(x):
                 newValue = emptySheet.get(x)
-                self.config.user(ctx.author).all().get(x).set(newValue)
+                userdata.get(x).set(newValue)
 
             await ctx.send(str(key) + ": " + str(userdata.get(key)))    
             overwrite(key)
