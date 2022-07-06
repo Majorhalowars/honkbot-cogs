@@ -66,7 +66,7 @@ class fate(commands.Cog):
         embedStuntList = ""
         tempSkillList = {}
         for skill in skillList:
-            tempSkillList[skill["skillName"]]=skill["skillLevel"]
+            tempSkillList[skill["skillName"]]=int(skill["skillLevel"])
 
         sortedSkills=dict(sorted(tempSkillList.items(),key= lambda x:x[1]))
 
