@@ -125,11 +125,11 @@ class fate(commands.Cog):
     @commands.command(name="completeimport")
     async def completeimport(self,ctx, importedJson: Optional[str] = ""):
         """Imports the export from the site!"""
-        
+
         if not ctx.message.attachments and importedJson == "":
             return await ctx.send("No file or text found!")
         elif importedJson != "":
-            importedJson = ast.literal_eval(importedJson)
+            importedJson = ast.literal_eval(f'importedJson')
         if ctx.message.attachments:
             file = ctx.message.attachments[0]
             file_name = file.filename.lower()
