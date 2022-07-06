@@ -71,7 +71,7 @@ class fate(commands.Cog):
             tempSkillList[tempSkillName]=int(tempSkillLevel)
         
             
-        sortedSkills=dict(sorted(tempSkillList.items(),key= lambda x:x[1]))
+        sortedSkills=dict(sorted(skillList.skillClass(),key= lambda x:x[1]))
         await ctx.send(str(skillList))
         await ctx.send(str(type(skillList)))
         await ctx.send(str(sortedSkills))
