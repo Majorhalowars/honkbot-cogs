@@ -60,8 +60,8 @@ class fate(commands.Cog):
 
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
-        for aspectName in aspectList:
-            await ctx.send(aspectName)
+        for aspect in aspectList:
+            await ctx.send(aspect.aspectName)
 
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx):
