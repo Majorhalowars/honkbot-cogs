@@ -70,14 +70,14 @@ class fate(commands.Cog):
         for stunt in stuntList:
             embedStuntList = embedStuntList + (str("\n" + stunt["stuntName"]))
         for skill in skillList:
-            embedStuntList = embedStuntList + (str("\n" + skill["skillName"] + ": " + str(skill["skillLevel"])))
+            embedSkillList = embedSkillList + (str("\n" + skill["skillName"] + ": " + str(skill["skillLevel"])))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
-        #sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=True)
+        sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=True)
         sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
-        #sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=False)
+        sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=False)
         await ctx.send(embed=sheetEmbed)
 
         
