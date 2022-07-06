@@ -71,7 +71,7 @@ class fate(commands.Cog):
         for stunt in stuntList:
             embedStuntList = embedStuntList + (str("\n" + stunt["stuntName"]))
         for skill in sortedSkills:
-            embedSkillList = embedSkillList + (str("\n" + skill["skillName"] + ": " + str(skill["skillLevel"])))
+            embedSkillList = embedSkillList + (str("\n" + skill[1] + ": " + str(skill[2])))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
