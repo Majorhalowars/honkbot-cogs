@@ -59,7 +59,6 @@ class fate(commands.Cog):
         """Imports the export from the site!"""
 
         importedJson = ast.literal_eval(importedJson)
-        importedJson.priv()
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:  
@@ -107,8 +106,8 @@ class fate(commands.Cog):
 
         file = await file.read()
         file = str(file).replace("\\r\\n", "")
-        importedJson = ast.literal_eval(file)
-        importedJson.priv()
+
+        importedJson = ast.literal_eval(file.decode('utf-8'))
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:  
