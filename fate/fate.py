@@ -41,12 +41,12 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:
-            def overwrite(x):
-                newValue = emptySheet.get(x)
-                userdata.get(x).set(newValue)
 
             await ctx.send(str(key) + ": " + str(userdata.get(key)))    
-            overwrite(key)
+ 
+            async with userdata as sheet:
+                sheet[emptySheet.get(key)]
+
             await ctx.send(str(key) + ": " + str(userdata.get(key)))
 
         userdata = await self.config.user(ctx.author).all()
