@@ -99,4 +99,13 @@ class fate(commands.Cog):
 
     @commands.command(name="attachment")
     async def messagetxt(self,ctx):
-        ctx.send(ctx.message.attachments)
+        if not ctx.message.attachments:
+            return await ctx.send("No file found!")
+
+        file = ctx.message.attachments[0]
+        file_name = file.filename.lower()
+        if not file_name.endswith((".txt")):
+            return await ctx.send("Must be a .txt file!")
+
+        file = await file.read()
+        return await ctx.send(file.read())
