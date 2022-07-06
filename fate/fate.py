@@ -112,7 +112,6 @@ class fate(commands.Cog):
         importedJson = importedJson.decode('utf-8')
         importedJson = ast.literal_eval(importedJson)
 
-        await ctx.send(str(importedJson) + "of type" + str(type(importedJson)))
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:  
@@ -126,3 +125,34 @@ class fate(commands.Cog):
     @commands.command(name="replytest")
     async def texttest(self,ctx, text: Optional[str] = ""):
         await ctx.send(text)
+
+    @commands.command(name="completeimport")
+    async def completeimport(self,ctx, text: Optional[str] = ""):
+        if not ctx.message.attachments and text == "":
+            return await ctx.send("No file or text found!")
+        elif text != "":
+            importedJson = ast.literal_eval(text)
+        if ctx.message.attachments:
+            file = ctx.message.attachments[0]
+            file_name = file.filename.lower()
+            if not file_name.endswith((".txt")):
+                return await ctx.send("Must be a .txt file!")
+
+            file = await file.read()
+            file = str(file).replace("\\r\\n", "")
+            file = bytes(file, 'utf-8')
+
+            importedJson = ast.literal_eval(file.decode('utf-8'))
+            importedJson = importedJson.decode('utf-8')
+            importedJson = ast.literal_eval(importedJson)
+        
+        userdata = await self.config.user(ctx.author).all()
+
+        for key in userdata:  
+            async with self.config.user(ctx.message.author).all() as userdata:
+                userdata[key] = importedJson.get(key)
+            await ctx.send(str(key) + ": " + str(userdata.get(key)))
+        userdata = await self.config.user(ctx.author).all()
+        
+        await ctx.send(userdata)
+        await ctx.send("Sheet Imported!")
