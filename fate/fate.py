@@ -28,6 +28,7 @@ class fate(commands.Cog):
     @commands.command(name="newSheet")
     async def createSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
+        
         emptySheet = {
             "name": "sati",
             "description": "wow",
@@ -36,11 +37,13 @@ class fate(commands.Cog):
             "stuntList": [],
             "characterImage": "image url"
         }
+        userdata = await self.config.user(ctx.author).all()
 
-        for key in emptySheet:
+        for key in userdata:
             def overwrite(x):
-                userdata = self.config.user(ctx.author)
                 userdata.key.set(emptySheet.get(x))
+            
+            await ctx.send(str(key) + str(userdata.get(key)))
             overwrite(key)
             await ctx.send(str(key) + str(emptySheet.get(key)))
         
