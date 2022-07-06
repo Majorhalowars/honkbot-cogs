@@ -57,7 +57,7 @@ class fate(commands.Cog):
     @commands.command(name="importsheet")
     async def importsheet(self, ctx, *, importedJson):
         """Imports the export from the site!"""
-        
+
         importedJson = ast.literal_eval(importedJson)
 
         userdata = await self.config.user(ctx.author).all()
@@ -96,3 +96,7 @@ class fate(commands.Cog):
                 return "`[-]`"
 
         await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+
+    @commands.command(name="attachment")
+    async def messagetxt(self,ctx):
+        ctx.send(ctx.message.attachments)
