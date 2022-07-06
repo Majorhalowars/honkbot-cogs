@@ -4,7 +4,7 @@ from redbot.core import checks, Config, commands, bot
 import discord
 import ast
 from random import randrange
-import re
+
 from typing import Optional, Union
 
 
@@ -108,5 +108,5 @@ class fate(commands.Cog):
             return await ctx.send("Must be a .txt file!")
 
         file = await file.read()
-        file = re.sub(r'\r\n', '', str(file))
+        file = str(file).replace("\\r\\n", "")
         return await ctx.send(file)
