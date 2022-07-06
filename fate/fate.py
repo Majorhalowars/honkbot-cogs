@@ -107,7 +107,7 @@ class fate(commands.Cog):
 
         file = await file.read()
         file = str(file).replace("\\r\\n", "")
-
+        file = str(file)
         importedJson = ast.literal_eval(file)
 
         userdata = await self.config.user(ctx.author).all()
