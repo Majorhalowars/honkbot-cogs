@@ -64,18 +64,14 @@ class fate(commands.Cog):
         embedAspectList = ""
         embedSkillList = ""
         embedStuntList = ""
-        tempSkillList = {}
-        for skill in skillList:
-            tempSkillName = skill["skillName"]
-            tempSkillLevel = skill["skillLevel"]
-            tempSkillList[tempSkillName]=int(tempSkillLevel)
         
-            
-        sortedSkills=dict(sorted(skillList.skillClass(),key= lambda x:x[1]))
         await ctx.send(str(skillList))
-        await ctx.send(str(type(skillList)))
+        await ctx.send(str(type(skillList)))  
+        sortedSkills = skillList.sort(key=lambda item: item.get("skillLevel"))
+        
         await ctx.send(str(sortedSkills))
         return await ctx.send(str(type(sortedSkills)))
+
         for aspect in aspectList:
             embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
         for stunt in stuntList:
