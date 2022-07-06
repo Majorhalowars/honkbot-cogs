@@ -57,16 +57,18 @@ class fate(commands.Cog):
     @commands.command(name="sheet")
     async def sheet(self, ctx):
         """Displays your current sheet"""
-
-        def createAspectList():
-            for aspect in aspectList:
-                return str("\n" + aspect["aspectName"])
+        embedAspectList = ""
+        embedSkillList = ""
+        embedStuntList = ""
+        for aspect in aspectList:
+            embedAspectList.append(str("\n" + aspect["aspectName"]))
 
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
-        sheetEmbed = discord.Embed(description=f'Aspects--{createAspectList()}\nSkills--\ngo here\nStunts--\ngo here',colour=ctx.author.color)
+        sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{userdata["name"]}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+        sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=True)
         await ctx.send(embed=sheetEmbed)
 
         
