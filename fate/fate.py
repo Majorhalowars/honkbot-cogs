@@ -97,7 +97,7 @@ class fate(commands.Cog):
     @commands.command(name="attachment")
     async def messagetxt(self,ctx):
         if not ctx.message.attachments:
-            return await ctx.send("No file found!")
+            return await ctx.send("No file found!" + ctx.message.contents)
 
         file = ctx.message.attachments[0]
         file_name = file.filename.lower()
@@ -122,3 +122,7 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
         await ctx.send("Sheet Imported!")
+
+    @commands.command(name="replytest")
+    async def texttest(self,ctx, text: Optional[str] = ""):
+        await ctx.send(text)
