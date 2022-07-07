@@ -65,9 +65,7 @@ class fate(commands.Cog):
         embedSkillList = ""
         embedStuntList = ""
         
-        await ctx.send(str(skillList))
-        await ctx.send(str(type(skillList)))
-
+        #Sorts the skills by their modifier. Holy fuck this was terrible to do because of funny indexing chains and dictionaries stored in lists
         size = len(skillList)
         for i in range(size):
             min_index = i
@@ -78,19 +76,11 @@ class fate(commands.Cog):
             skillList[i] = skillList[min_index]
             skillList[min_index] = temp  
 
-        #sortedSkills = skillList.sort(key=lambda item: item.get("skillLevel"))
-        
-        await ctx.send(str(skillList))
-        await ctx.send(str(type(skillList)))
-
-        await ctx.send(str(sortedSkills))
-        return await ctx.send(str(type(sortedSkills)))
-
         for aspect in aspectList:
             embedAspectList = embedAspectList + (str("\n" + aspect["aspectName"]))
         for stunt in stuntList:
             embedStuntList = embedStuntList + (str("\n" + stunt["stuntName"]))
-        for skill in sortedSkills:
+        for skill in skillList:
             embedSkillList = embedSkillList + (str("\n" + skill["skillName"] + ": " + str(skill["skillLevel"])))
 
         sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
