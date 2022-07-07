@@ -72,7 +72,7 @@ class fate(commands.Cog):
         for i in range(size):
             min_index = i
             for j in range(i + 1, size):
-                if skillList[min_index]["Age"] > skillList[j]["skillLevel"]:
+                if skillList[min_index]["skillLevel"] > skillList[j]["skillLevel"]:
                     min_index = j    
             temp = skillList[i]
             skillList[i] = skillList[min_index]
