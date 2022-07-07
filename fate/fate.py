@@ -156,3 +156,26 @@ class fate(commands.Cog):
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
 
         await ctx.send(embed=sheetEmbed)
+    
+    @commands.command(name="stunt")
+    async def viewStunt(self, ctx, *, importedJson: Optional[str] = ""):
+        """View a stunt's description. Case sensitive."""
+
+        user = ctx.author
+        userdata = await self.config.user(ctx.author).all()
+        stuntList = userdata["stuntList"]
+        stuntDesc = ""
+
+        if importedJson == "":
+            return await ctx.send("You forgot the stunt! Enter a stunt name from your sheet.")
+        for stunt in stuntList:
+            if importedJson == str(stunt["stuntName"]):
+                stuntDesc = str(stunt["stuntDescription"])
+        if stuntDesc == "":
+            return await ctx.send("No stunt found! Make sure you sent it right!")
+
+        sheetEmbed = discord.Embed(description=f'{str(stuntDesc)}',colour=ctx.author.color)
+        sheetEmbed.set_author(name=f'{importedJson}')
+        sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+
+        await ctx.send(embed=sheetEmbed)
