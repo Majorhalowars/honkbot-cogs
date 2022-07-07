@@ -195,6 +195,6 @@ class fate(commands.Cog):
         sheetOutput = io.BytesIO()
         sheetOutput.write(bytes(str(userdata), "utf-8"))
         
-        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\nPlus a copy of your active sheet",  file=discord.File(sheetOutput, "export.txt"))
+        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\nPlus a copy of your active sheet",  file=discord.File(sheetOutput, "sheet_export.txt"))
 
         sheetOutput.close()
