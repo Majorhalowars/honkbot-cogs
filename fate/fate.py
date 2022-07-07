@@ -51,7 +51,7 @@ class fate(commands.Cog):
     
     @commands.command(name="sheet")
     async def sheet(self, ctx):
-        """Displays your current sheet"""
+        """Displays your current sheet in a snazzy embed."""
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
         stuntList = userdata["stuntList"]
@@ -133,3 +133,26 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Sheet Imported!")
+
+    @commands.command(name="aspect")
+    async def viewAspect(self, ctx, *, importedJson: Optional[str] = ""):
+        """View an aspect's description. Case sensitive."""
+
+        user = ctx.author
+        userdata = await self.config.user(ctx.author).all()
+        aspectList = userdata["aspectList"]
+        aspectDesc = ""
+        if importedJson == "":
+            return await ctx.send("You forgot the aspect! Enter an aspect name from your sheet.")
+        for aspect in aspectList:
+            if importedJson == str(aspect["aspectName"]):
+                aspectDesc = str(aspect["aspectDescription"])
+        if aspectDesc == "":
+            return await ctx.send("No aspect found! Make sure you sent it right!")
+
+        await ctx.send(str(aspectDesc))
+        return
+        sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
+        sheetEmbed.set_author(name=f'{importedJson}')
+
+        await ctx.send(embed=sheetEmbed)
