@@ -84,7 +84,10 @@ class fate(commands.Cog):
         sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=False)
         sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
         sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=True)
-        await ctx.send(embed=sheetEmbed)
+        try:
+            await ctx.send(embed=sheetEmbed)
+        except:
+            ctx.send("An exception was caused! Do you have an empty sheet? That'll cause some issues")
 
         
 
