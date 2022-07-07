@@ -6,7 +6,7 @@ import ast
 from random import randrange
 from operator import itemgetter
 from typing import Optional, Union
-
+import io
 
 class fate(commands.Cog):
 
@@ -191,9 +191,11 @@ class fate(commands.Cog):
     @commands.command(name="fatesite")
     async def webpage(self, ctx):
         """Easy link to the fate sheet page, plus a sheet copy."""
-        ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\n plus a copy of your active sheet")
         userdata = await self.config.user(ctx.author).all()
-        with open("export.txt", "w") as file:
-            file.write(userdata)
-        with open("export.txt", "rb") as file:
-            await ctx.send("A copy of your current sheet, aswell", file=discord.File(file, "export.txt"))
+        sheetOutput = io.StringIO()
+        await sheetOutput.write(userdata)
+        
+        with open(sheetOutput, "rb") as file:
+            await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\n plus a copy of your active sheet",  file=discord.File(file, "export.txt"))
+
+        sheetOutput.close()
