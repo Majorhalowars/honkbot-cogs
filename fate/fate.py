@@ -142,6 +142,7 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         aspectList = userdata["aspectList"]
         aspectDesc = ""
+
         if importedJson == "":
             return await ctx.send("You forgot the aspect! Enter an aspect name from your sheet.")
         for aspect in aspectList:
@@ -150,9 +151,8 @@ class fate(commands.Cog):
         if aspectDesc == "":
             return await ctx.send("No aspect found! Make sure you sent it right!")
 
-        await ctx.send(str(aspectDesc))
-        return
-        sheetEmbed = discord.Embed(description=f'{userdata["description"]}',colour=ctx.author.color)
+        sheetEmbed = discord.Embed(description=f'{str(aspectDesc)}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{importedJson}')
+        sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
 
         await ctx.send(embed=sheetEmbed)
