@@ -191,10 +191,8 @@ class fate(commands.Cog):
     @commands.command(name="fatesite")
     async def webpage(self, ctx):
         """Easy link to the fate sheet page, doubles as a sheet export too."""
-        
+
         userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
-        await ctx.send(type(userdata))
         sheetData = str(userdata)
 
         sheetOutput = io.BytesIO()
