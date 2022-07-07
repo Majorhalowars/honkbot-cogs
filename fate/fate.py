@@ -190,7 +190,15 @@ class fate(commands.Cog):
 
     @commands.command(name="fatesite")
     async def webpage(self, ctx):
-        """Easy link to the fate sheet page, doubles as a sheet export too."""
+        """Easy link to the fate sheet page."""
+
+        userdata = await self.config.user(ctx.author).all()
+
+        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/")
+
+    @commands.command(name="exportsheet")
+    async def sheetcopy(self, ctx):
+        """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
         sheetData = str(userdata).replace("'", '"')
@@ -199,7 +207,6 @@ class fate(commands.Cog):
         sheetOutput.write(bytes(sheetData, "utf-8"))
         sheetOutput.seek(0)
 
-        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\nPlus a copy of your active sheet",file=discord.File(sheetOutput, "export.txt"))
+        await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.txt"))
         sheetOutput.close()
-
         
