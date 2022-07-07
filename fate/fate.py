@@ -87,7 +87,7 @@ class fate(commands.Cog):
         try:
             await ctx.send(embed=sheetEmbed)
         except:
-            ctx.send("An exception was caused! Do you have an empty sheet? That'll cause some issues")
+            await ctx.send("An exception was caused! Do you have an empty sheet? That'll cause some issues")
 
         
 
