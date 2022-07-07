@@ -192,9 +192,9 @@ class fate(commands.Cog):
     async def webpage(self, ctx):
         """Easy link to the fate sheet page, plus a sheet copy."""
         userdata = await self.config.user(ctx.author).all()
-        sheetOutput = io.StringIO()
-        sheetOutput.write(str(userdata))
+        sheetOutput = io.BytesIO()
+        sheetOutput.write(bytes(str(userdata), "utf-8"))
         
-        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\n plus a copy of your active sheet",  file=discord.File(sheetOutput, "export.txt"))
+        await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/\nPlus a copy of your active sheet",  file=discord.File(sheetOutput, "export.txt"))
 
         sheetOutput.close()
