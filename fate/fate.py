@@ -42,16 +42,11 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
 
         for key in userdata:
-
-            await ctx.send(str(key) + ": " + str(userdata.get(key)))    
- 
             async with self.config.user(ctx.message.author).all() as userdata:
                 userdata[key] = emptySheet.get(key)
 
-            await ctx.send(str(key) + ": " + str(userdata.get(key)))
 
         userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
         await ctx.send("Reset complete!")
     
     @commands.command(name="sheet")
@@ -137,11 +132,4 @@ class fate(commands.Cog):
         
         userdata = await self.config.user(ctx.author).all()
 
-        for key in userdata:  
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata[key] = importedJson.get(key)
-            await ctx.send(str(key) + ": " + str(userdata.get(key)))
-        userdata = await self.config.user(ctx.author).all()
-
-        await ctx.send(userdata)
         await ctx.send("Sheet Imported!")
