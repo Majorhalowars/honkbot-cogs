@@ -200,8 +200,9 @@ class fate(commands.Cog):
         sheetOutput.write(bytes(sheetData, "utf-8"))
         await ctx.send(sheetData)
         await ctx.send(type(sheetData))
-
-        await ctx.send(file=discord.File(sheetOutput.seek(0), "export.txt"))
+        sheetOutput.seek(0)
+        
+        await ctx.send(file=discord.File(sheetOutput, "export.txt"))
 
         sheetOutput.close()
         return    
