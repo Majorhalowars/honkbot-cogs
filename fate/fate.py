@@ -201,7 +201,7 @@ class fate(commands.Cog):
         await ctx.send(sheetData)
         await ctx.send(type(sheetData))
 
-        await ctx.send(file=discord.File(open(sheetOutput, "rb"), "export.txt"))
+        await ctx.send(file=discord.File(sheetOutput.seek(0), "export.txt"))
 
         sheetOutput.close()
         return    
