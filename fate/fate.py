@@ -201,7 +201,7 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-        ctx.send(userdata)
+        await ctx.send(userdata)
         #sheetData = str(userdata)
 
         #sheetOutput = io.BytesIO()
