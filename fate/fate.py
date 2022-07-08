@@ -201,12 +201,13 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-        sheetData = str(userdata)
+        ctx.send(userdata)
+        #sheetData = str(userdata)
 
-        sheetOutput = io.BytesIO()
-        sheetOutput.write(bytes(sheetData, "utf-8"))
-        sheetOutput.seek(0)
+        #sheetOutput = io.BytesIO()
+        #sheetOutput.write(bytes(sheetData, "utf-8"))
+        #sheetOutput.seek(0)
 
-        await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
-        sheetOutput.close()
+        #await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
+        #sheetOutput.close()
         
