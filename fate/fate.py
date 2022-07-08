@@ -7,6 +7,7 @@ from random import randrange
 from operator import itemgetter
 from typing import Optional, Union
 import io
+import json
 
 class fate(commands.Cog):
 
@@ -201,13 +202,14 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
-        sheetData = str(userdata)
 
-        sheetOutput = io.BytesIO()
-        sheetOutput.write(bytes(sheetData, "utf-8"))
-        sheetOutput.seek(0)
+        await ctx.send(json.dumps(userdata))
+        #sheetData = str(userdata)
 
-        await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
-        sheetOutput.close()
+        #sheetOutput = io.BytesIO()
+        #sheetOutput.write(bytes(sheetData, "utf-8"))
+        #sheetOutput.seek(0)
+
+        #await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
+        #sheetOutput.close()
         
