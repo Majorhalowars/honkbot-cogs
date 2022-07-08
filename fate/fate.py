@@ -201,7 +201,7 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-        #sheetData = str(userdata).replace("'", '"')
+        sheetData = str(userdata)
 
         sheetOutput = io.BytesIO()
         sheetOutput.write(bytes(sheetData, "utf-8"))
