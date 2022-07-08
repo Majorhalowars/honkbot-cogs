@@ -84,10 +84,10 @@ class fate(commands.Cog):
         sheetEmbed.add_field(name="Aspects:", value=f'{embedAspectList}', inline=False)
         sheetEmbed.add_field(name="Stunts:", value=f'{embedStuntList}', inline=True)
         sheetEmbed.add_field(name="Skills:", value=f'{embedSkillList}', inline=True)
-        try:
-            await ctx.send(embed=sheetEmbed)
-        except:
-            await ctx.send("An exception was caused! Do you have an empty sheet? That'll cause some issues")
+       
+        await ctx.send(embed=sheetEmbed)
+
+
 
         
 
@@ -202,12 +202,12 @@ class fate(commands.Cog):
 
         userdata = await self.config.user(ctx.author).all()
         await ctx.send(userdata)
-        #sheetData = str(userdata)
+        sheetData = str(userdata)
 
-        #sheetOutput = io.BytesIO()
-        #sheetOutput.write(bytes(sheetData, "utf-8"))
-        #sheetOutput.seek(0)
+        sheetOutput = io.BytesIO()
+        sheetOutput.write(bytes(sheetData, "utf-8"))
+        sheetOutput.seek(0)
 
-        #await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
-        #sheetOutput.close()
+        await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
+        sheetOutput.close()
         
