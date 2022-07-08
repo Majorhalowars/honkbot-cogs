@@ -8,6 +8,7 @@ from operator import itemgetter
 from typing import Optional, Union
 import io
 import json
+from html import unescape
 
 class fate(commands.Cog):
 
@@ -202,8 +203,9 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-
-        await ctx.send(json.dumps(userdata))
+        dumpy= json.dumps(userdata, indent = 4)
+        dumpy = unescape(dumpy)
+        await ctx.send(dumpy)
         #sheetData = str(userdata)
 
         #sheetOutput = io.BytesIO()
