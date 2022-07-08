@@ -203,9 +203,10 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
-        dumpy= json.dumps(userdata, indent = 4)
-        dumpy = unescape(dumpy)
-        sheetData = str(userdata)
+        dumpy = unescape(userdata)
+        dumpy= json.dumps(dumpy, indent = 4)
+        
+        sheetData = str(dumpy)
 
         sheetOutput = io.BytesIO()
         sheetOutput.write(bytes(sheetData, "utf-8"))
