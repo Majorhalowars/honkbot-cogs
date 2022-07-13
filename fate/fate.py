@@ -108,18 +108,18 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
         skillNameList = ""
-        skillExists = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
+        skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
         
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
         if skill != "":
-            if skillExists:
-                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + " +" + str(skillExists["skillLevel"])}', colour=ctx.author.color)
-                rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillExists["skillName"]}')
+            if skillTarget:
+                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + " +" + str(skillTarget["skillLevel"])}', colour=ctx.author.color)
+                rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillTarget["skillName"]}')
                 rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
                 return await ctx.send(embed=rollEmbed)
 
-            if not skillExists:
+            if not skillTarget:
                 return await ctx.send("wawawaawa fuck weezer i hate them!!!!")
             
 
