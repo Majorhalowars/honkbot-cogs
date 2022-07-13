@@ -107,7 +107,6 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
-        skillNameList = ""
         skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
         
         if skill == "":
