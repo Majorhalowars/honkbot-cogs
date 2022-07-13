@@ -94,11 +94,21 @@ class fate(commands.Cog):
         
 
     @commands.command(name="fateroll")
-    async def fudgedice(self,ctx):
-        """Rolls 1d3, also known as fudge die!"""
+    async def fudgedice(self,ctx, *, skill: Optional[str] = ""):
+        """Rolls 1d3, and write a skill after to do a skill roll."""
 
         user = ctx.author
-
+        userdata = await self.config.user(ctx.author).all()
+        skillList = userdata["skillList"]
+        skillNameList = ""
+        skillExists = next((skillDict['skillName'].lower() == skill.lower() for skillDict in skillList), False)
+        skillNumber = ""
+        rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die()}', colour=ctx.author.color)
+        rollEmbed.set_author(name=f'{userdata["name"]}')
+        rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+        for skill in skillList:
+            skillNameList = skillNameList + (str(skill["skillName"]))
+        skillNameList = skillNameList.lower()
         def die():
             result = randrange(1,4)
             if result == 3:
@@ -107,8 +117,14 @@ class fate(commands.Cog):
                 return "`[ ]`"
             else:
                 return "`[-]`"
+        if skill == "":
+            return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+        if skillExists:
+            return ctx.send(str(skillExists['skillLevel']))
+        else: 
+            return await ctx.send("wwawawawawa -poppin")
 
-        await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+            
 
     @commands.command(name="importsheet")
     async def completeimport(self, ctx, *, importedJson: Optional[str] = ""):
