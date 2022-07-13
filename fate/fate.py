@@ -117,6 +117,7 @@ class fate(commands.Cog):
                 rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + skillExists["skillLevel"]}', colour=ctx.author.color)
                 rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillExists["skillName"]}')
                 rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+                return await ctx.send(embed=rollEmbed)
 
             if not skillExists:
                 return await ctx.send("wawawaawa fuck weezer i hate them!!!!")
