@@ -94,7 +94,7 @@ class fate(commands.Cog):
         
 
     @commands.command(name="fateroll")
-    async def fudgedice(self,ctx, *, skill: Optional[str] = ""):
+    async def fudgedice(self, ctx , *, skill: Optional[str] = ""):
         """Rolls 1d3, and write a skill after to do a skill roll."""
         def die():
             result = randrange(1,4)
@@ -109,19 +109,19 @@ class fate(commands.Cog):
         skillList = userdata["skillList"]
         skillNameList = ""
         skillExists = next((skillDict['skillName'].lower() == skill.lower() for skillDict in skillList), False)
-        skillNumber = ""
         rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die()}', colour=ctx.author.color)
         rollEmbed.set_author(name=f'{userdata["name"]}')
         rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
-        for skill in skillList:
-            skillNameList = skillNameList + (str(skill["skillName"]))
-        skillNameList = skillNameList.lower()
+
+        #for skill in skillList:
+            #skillNameList = skillNameList + (str(skill["skillName"]))
+        #skillNameList = skillNameList.lower()
         
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
         if skillExists:
-            return ctx.send(str(skillExists['skillLevel']))
-        else: 
+            return await ctx.send(str(skillExists['skillLevel']))
+        if not skillExists: 
             return await ctx.send("wwawawawawa -poppin")
 
             
