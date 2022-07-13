@@ -114,7 +114,7 @@ class fate(commands.Cog):
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
         if skill != "":
             if skillExists:
-                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + str(skillExists["skillLevel"])}', colour=ctx.author.color)
+                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + " +" + str(skillExists["skillLevel"])}', colour=ctx.author.color)
                 rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillExists["skillName"]}')
                 rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
                 return await ctx.send(embed=rollEmbed)
