@@ -122,7 +122,7 @@ class fate(commands.Cog):
         if skillExists:
             return await ctx.send(str(skillExists['skillLevel']))
         if not skillExists: 
-            return await ctx.send("wwawawawawa -poppin")
+            return await ctx.send(str(skillExists))
 
             
 
