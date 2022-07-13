@@ -108,7 +108,7 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
         skillNameList = ""
-        skillExists = next((skillDict['skillName'].lower() == skill.lower() for skillDict in skillList), False)
+        skillExists = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
         rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die()}', colour=ctx.author.color)
         rollEmbed.set_author(name=f'{userdata["name"]}')
         rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
