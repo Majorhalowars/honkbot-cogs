@@ -119,11 +119,9 @@ class fate(commands.Cog):
         
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
-        if skillExists:
-            return await ctx.send(str(skillExists['skillLevel']))
-        if not skillExists: 
-            return await ctx.send(str(skillExists))
-
+        if skill != "":
+            for skillDict in skillList:
+                await ctx.send(str(skillDict['skillName'].lower()))
             
 
     @commands.command(name="importsheet")
