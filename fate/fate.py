@@ -109,19 +109,17 @@ class fate(commands.Cog):
         skillList = userdata["skillList"]
         skillNameList = ""
         skillExists = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
-        rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die()}', colour=ctx.author.color)
-        rollEmbed.set_author(name=f'{userdata["name"]}')
-        rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
-
-        #for skill in skillList:
-            #skillNameList = skillNameList + (str(skill["skillName"]))
-        #skillNameList = skillNameList.lower()
         
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
         if skill != "":
-            for skillDict in skillList:
-                await ctx.send(str(skillExists))
+            if skillExists:
+                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + skillExists["skillLevel"]}', colour=ctx.author.color)
+                rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillExists["skillName"]}')
+                rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+
+            if not skillExists:
+                return await ctx.send("wawawaawa fuck weezer i hate them!!!!")
             
 
     @commands.command(name="importsheet")
