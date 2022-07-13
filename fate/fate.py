@@ -96,7 +96,14 @@ class fate(commands.Cog):
     @commands.command(name="fateroll")
     async def fudgedice(self,ctx, *, skill: Optional[str] = ""):
         """Rolls 1d3, and write a skill after to do a skill roll."""
-
+        def die():
+            result = randrange(1,4)
+            if result == 3:
+                return "`[+]`"
+            elif result == 2:
+                return "`[ ]`"
+            else:
+                return "`[-]`"
         user = ctx.author
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
@@ -109,14 +116,7 @@ class fate(commands.Cog):
         for skill in skillList:
             skillNameList = skillNameList + (str(skill["skillName"]))
         skillNameList = skillNameList.lower()
-        def die():
-            result = randrange(1,4)
-            if result == 3:
-                return "`[+]`"
-            elif result == 2:
-                return "`[ ]`"
-            else:
-                return "`[-]`"
+        
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
         if skillExists:
