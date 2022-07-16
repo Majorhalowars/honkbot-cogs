@@ -96,24 +96,36 @@ class fate(commands.Cog):
     @commands.command(name="fateroll")
     async def fudgedice(self, ctx , *, skill: Optional[str] = ""):
         """Rolls 1d3, and write a skill after to do a skill roll."""
-        def die():
+        roll1 = []
+        roll2 = []
+        roll3 = []
+        roll4 = []
+        def die(roll):
             result = randrange(1,4)
             if result == 3:
-                return "`[+]`"
+                roll.insert(0,1)
+                roll.insert(1,"`[+]`")
             elif result == 2:
-                return "`[ ]`"
+                roll.insert(0,0)
+                roll.insert(1,"`[ ]`" )  
             else:
-                return "`[-]`"
+                roll.insert(0,-1)
+                roll.insert(1,"`[-]`")
+        die(roll1)
+        die(roll2)
+        die(roll3)
+        die(roll4)
         user = ctx.author
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
         skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
         
         if skill == "":
-            return await ctx.send(str(user.name) + " Rolled: " + die() + " " + die() + " " + die() + " " + die())
+            return await ctx.send(str(user.name) + " Rolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1])
         if skill != "":
             if skillTarget:
-                rollEmbed = discord.Embed(description=f'{" Rolled: " + die() + " " + die() + " " + die() + " " + die() + " +" + str(skillTarget["skillLevel"])}', colour=ctx.author.color)
+                rollEmbed = discord.Embed(description=f'{"Rolling with a skill of " + str(skillTarget["skillLevel"]) + "\nRolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1]}', colour=ctx.author.color)
+                rollEmbed.add_field(name="Total:", value=f'{int(roll1[0]+roll2[0]+roll3[0]+roll4[0]) + " + " + str(skillTarget["skillLevel"]) + " = " + int(roll1[0]+roll2[0]+roll3[0]+roll4[0]+skillTarget["skillLevel"])}', inline=True)
                 rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillTarget["skillName"]}')
                 rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
                 return await ctx.send(embed=rollEmbed)
