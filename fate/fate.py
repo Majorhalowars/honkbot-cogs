@@ -124,7 +124,7 @@ class fate(commands.Cog):
             return await ctx.send(str(user.name) + " Rolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1])
         if skill != "":
             if skillTarget:
-                rollEmbed = discord.Embed(description=f'{"Rolling with a skill of " + str(skillTarget["skillLevel"]) + "\nRolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1]}', colour=ctx.author.color)
+                rollEmbed = discord.Embed(description=format("Rolling with a skill of " + str(skillTarget["skillLevel"]) + "\nRolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1]), colour=ctx.author.color)
                 rollEmbed.add_field(name="Total:", value=f'{int(roll1[0]+roll2[0]+roll3[0]+roll4[0]) + " + " + str(skillTarget["skillLevel"]) + " = " + int(roll1[0]+roll2[0]+roll3[0]+roll4[0]+skillTarget["skillLevel"])}', inline=True)
                 rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skillTarget["skillName"]}')
                 rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
