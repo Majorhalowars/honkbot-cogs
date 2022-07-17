@@ -118,7 +118,7 @@ class fate(commands.Cog):
         user = ctx.author
         userdata = await self.config.user(ctx.author).all()
         skillList = userdata["skillList"]
-        skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill), False)
+        skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill.lower()), False)
         
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1])
