@@ -232,7 +232,7 @@ class fate(commands.Cog):
         }
         userdata = await self.config.user(ctx.author).all()
         
-        await userdata.clear()
+        userdata.clear()
 
         await ctx.send("Reset complete!")
 
