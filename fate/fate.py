@@ -232,7 +232,7 @@ class fate(commands.Cog):
         }
         userdata = await self.config.user(ctx.author).all()
         
-        userdata = mutliSheet
+        userdata.set(mutliSheet)
 
         await ctx.send("Reset complete!")
 
