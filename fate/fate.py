@@ -25,13 +25,18 @@ class fate(commands.Cog):
             "characterImage": ""
         } 
 
-        self.config.register_user(**emptySheet)
+        mutliSheetLayer = {
+            "sheets": "",
+            "activeSheetKey": ""
+        }
+
+        self.config.register_user(**mutliSheetLayer)
 
 
     @commands.command(name="clearsheet")
     async def wipeSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
-        
+        ##DEPRECEATED, REPLACE WITH "!remove SHEETKEY"
         emptySheet = {
             "name": "",
             "description": "",
@@ -239,3 +244,9 @@ class fate(commands.Cog):
         await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
         sheetOutput.close()
         
+    @commands.command(name="debug")
+    async def debugConfig(self,ctx):
+        """Debug command"""
+
+        userdata = await self.config.user(ctx.author).all()
+        await ctx.send(userdata)
