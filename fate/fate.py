@@ -25,20 +25,26 @@ class fate(commands.Cog):
         self.config.register_user(**mutliSheet)
 
 
-    @commands.command(name="clearsheet")
-    async def wipeSheet(self, ctx):
-        """Wipes your sheet, squeaky clean."""
-        ##DEPRECEATED, REPLACE WITH "!remove SHEETKEY"
+    @commands.command(name="deletesheet")
+    async def deleteSheet(self, ctx , *, sheetForDeleton: Optional[str] = ""):
+        """Deletes a sheet. CANNOT BE UNDONE"""
 
-        mutliSheet = {
-            "sheets": "",
-            "activeSheetKey": ""
-        }
+        userdata = await self.config.user(ctx.author).all()
+        sheetList = userdata["sheets"]
 
-        await self.config.clear()
-        await self.config.set(mutliSheet)
 
-        await ctx.send("Reset complete!")
+        if sheetForDeleton == "":
+            return await ctx.send("Include the name of the sheet to be removed -- case sensitive please.")
+        
+        if sheetForDeleton in sheetList:
+            await ctx.send("Deleting character...")
+            async with self.config.user(ctx.message.author).all() as userdata:
+                sheetList.pop(sheetForDeleton)
+            await ctx.send(sheetForDeleton + " has been __Deleted.__")
+        else:
+            await ctx.send("No sheet found, case sensitive.")
+
+        
     
     @commands.command(name="sheet")
     async def sheet(self, ctx):
@@ -81,7 +87,7 @@ class fate(commands.Cog):
 
     @commands.command(name="fateroll")
     async def fudgedice(self, ctx , *, skill: Optional[str] = ""):
-        """Rolls 1d3, and write a skill after to do a skill roll."""
+        """Rolls 1d3, and provide a skill after to do a skill roll."""
         roll1 = []
         roll2 = []
         roll3 = []
@@ -233,17 +239,6 @@ class fate(commands.Cog):
 
         await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
         sheetOutput.close()
-
-    @commands.command(name="debug")
-    async def debugcommand(self, ctx):
-        """debug command"""
-
-        userdata = await self.config.user(ctx.author).all()
-        sheetlist = ""
-        await ctx.send(userdata)
-        for key in userdata["sheets"]:
-            sheetlist = sheetlist + (str("\n" + key))
-        await ctx.send(sheetlist)
 
     @commands.command(name="tf")
     async def changeActiveKey(self, ctx, *, importedJson: Optional[str] = ""):
