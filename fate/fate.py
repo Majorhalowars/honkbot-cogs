@@ -191,7 +191,7 @@ class fate(commands.Cog):
             if searchedStunt == stunt["stuntName"]:
                 stuntDesc = stunt["stuntDescription"]
                 stuntFound = True
-                return
+                break
         if stuntFound == False:
             await ctx.send("No stunt found matching that name!")
 
