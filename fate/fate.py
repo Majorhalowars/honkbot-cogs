@@ -232,12 +232,10 @@ class fate(commands.Cog):
         }
         userdata = await self.config.user(ctx.author).all()
         
-        userdata.set(mutliSheet)
+        await userdata.clear()
 
         await ctx.send("Reset complete!")
 
-
-        userdata = await self.config.user(ctx.author).all()
         dumpy = unescape(userdata)
         dumpy= json.dumps(dumpy, indent = 4)
         
