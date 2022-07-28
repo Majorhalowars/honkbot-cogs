@@ -234,12 +234,14 @@ class fate(commands.Cog):
 
         # await ctx.send("Reset complete!")
 
-        # await ctx.send(userdata)
+        await ctx.send(userdata)
 
         
         ###
         if not ctx.message.attachments and importedJson == "":
-            return await ctx.send("No file or text found!")
+            await ctx.send(userdata)
+            await ctx.send(userdata["sheets"]) 
+            return
         if importedJson != "":
             if not str(f'"name":') in importedJson:
                 return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
@@ -261,7 +263,7 @@ class fate(commands.Cog):
         
         userdata["sheets"].update({importedJson["name"]: importedJson})
 
-
+        await ctx.send(userdata)
         await ctx.send(userdata["sheets"])
         
 
