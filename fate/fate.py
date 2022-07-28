@@ -251,5 +251,5 @@ class fate(commands.Cog):
                     userdata["activeSheetKey"] = importedJson
                 await ctx.send("Active sheet changed to " + userdata["activeSheetKey"] + "!")
                 return
-        else:
-            return await ctx.send("(im really sorry it's case sensitive, just do !tf and copy the name you want)")
+            else:
+                return await ctx.send("(im really sorry it's case sensitive, just do !tf and copy the name you want)")
