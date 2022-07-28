@@ -189,7 +189,7 @@ class fate(commands.Cog):
         
         for stunt in stuntList:
             if searchedStunt == stunt["stuntName"]:
-                stuntDesc = stuntList[searchedStunt]["stuntDescription"]
+                stuntDesc = stunt["stuntDescription"]
                 stuntFound = True
                 return
         if stuntFound == False:
