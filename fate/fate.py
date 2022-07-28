@@ -16,15 +16,6 @@ class fate(commands.Cog):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=66617465)
 
-        emptySheet = {
-            "name": "",
-            "description": "",
-            "skillList": [],
-            "aspectList": [],
-            "stuntList": [],
-            "characterImage": ""
-        } 
-
         mutliSheet = {
             "sheets": "",
             "activeSheetKey": ""
@@ -43,6 +34,7 @@ class fate(commands.Cog):
             "activeSheetKey": ""
         }
 
+        self.config.clear()
         self.config.set(mutliSheet)
 
 
