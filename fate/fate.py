@@ -39,7 +39,7 @@ class fate(commands.Cog):
         if sheetForDeleton in sheetList:
             await ctx.send("Deleting character...")
             async with self.config.user(ctx.message.author).all() as userdata:
-                sheetList.pop(sheetForDeleton)
+                userdata["sheets"].pop(sheetForDeleton)
             await ctx.send(sheetForDeleton + " has been __Deleted.__")
         else:
             await ctx.send("No sheet found, case sensitive.")
