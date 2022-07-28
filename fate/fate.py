@@ -242,18 +242,24 @@ class fate(commands.Cog):
 
     @commands.command(name="tf")
     async def changeActiveKey(self, ctx, *, importedJson: Optional[str] = ""):
-        """Changes your active character!"""
+        """Changes active character! Use without a name for a list."""
 
         userdata = await self.config.user(ctx.author).all()
         sheetlist = ""
+        user = ctx.author
 
         for key in userdata["sheets"]:
             sheetlist = sheetlist + (str("\n" + key))
 
         if not ctx.message.attachments and importedJson == "":
+            sheetEmbed = discord.Embed(description=f'{"Active Character: " + userdata["activeSheetKey"] + "\n\n Avalible Characters:" + sheetlist}',colour=ctx.author.color)
+            sheetEmbed.set_author(name=f'Character List')
+            sheetEmbed.set_thumbnail(url=f'{user.avatar_url}')
+
             return await ctx.send("Active Character:" + userdata["activeSheetKey"] + "\n" + sheetlist)
         if importedJson != "":
             if importedJson in sheetlist:
+                
                 async with self.config.user(ctx.message.author).all() as userdata:
                     userdata["activeSheetKey"] = importedJson
                 await ctx.send("Active sheet changed to " + userdata["activeSheetKey"] + "!")
