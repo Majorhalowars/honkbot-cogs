@@ -1,7 +1,6 @@
 from logging.config import IDENTIFIER
 import string
 
-from jmespath import search
 from redbot.core import checks, Config, commands, bot
 import discord
 import ast
