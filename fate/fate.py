@@ -34,7 +34,7 @@ class fate(commands.Cog):
             "activeSheetKey": ""
         }
 
-        await self.config.clear_all()
+        await self.config.clear()
         await self.config.set(mutliSheet)
 
         await ctx.send("Reset complete!")
