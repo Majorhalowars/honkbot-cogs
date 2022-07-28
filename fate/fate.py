@@ -159,15 +159,19 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         userdata = userdata["sheets"][userdata['activeSheetKey']]
         aspectList = userdata["aspectList"]
-        aspectDesc = ""
+        aspectFound = False
 
         if searchedAspect == "":
             return await ctx.send("Provide an aspect to search when using the command")
         
-        if searchedAspect in aspectList:
-            aspectDesc = aspectList[searchedAspect]["aspectDescription"]
-        else:
-            return await ctx.send("No aspect found matching that name!")
+        for aspect in aspectList:
+            if searchedAspect == aspect["aspectName"]:
+                aspectDesc = aspect["aspectDescription"]
+                aspectFound = True
+                break
+        if aspectFound == False:
+            await ctx.send("No aspect found matching that name!")
+
 
         sheetEmbed = discord.Embed(description=f'{str(aspectDesc)}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{searchedAspect}')
