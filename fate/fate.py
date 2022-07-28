@@ -201,8 +201,6 @@ class fate(commands.Cog):
     async def webpage(self, ctx):
         """Easy link to the fate sheet page."""
 
-        userdata = await self.config.user(ctx.author).all()
-
         await ctx.send("Click [FATE SHEET] on the sidebar of the page.\nhttps://majorhalowars.github.io/honksite/")
 
     @commands.command(name="exportsheet")
@@ -232,5 +230,19 @@ class fate(commands.Cog):
         for key in userdata["sheets"]:
             sheetlist = sheetlist + (str("\n" + key))
         await ctx.send(sheetlist)
-        
 
+    @commands.command(name="tf")
+    async def changeActiveKey(self, ctx, *, importedJson: Optional[str] = ""):
+        """Changes your active character!"""
+
+        userdata = await self.config.user(ctx.author).all()
+
+        for key in userdata["sheets"]:
+            sheetlist = sheetlist + (str("\n" + key))
+
+        if not ctx.message.attachments and importedJson == "":
+            await ctx.send("Active Character:" + userdata["activeSheetKey"] + "\n" + sheetlist)
+            return await ctx.send(sheetlist)
+        if importedJson != "":
+            if importedJson in sheetlist:
+                userdata["activeSheetKey"].update(str(importedJson))
