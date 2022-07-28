@@ -221,5 +221,33 @@ class fate(commands.Cog):
 
         await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
         sheetOutput.close()
+
+    @commands.command(name="debug")
+    async def debugcommand(self, ctx):
+        """debug command"""
+
+        mutliSheet = {
+            "sheets": "",
+            "activeSheetKey": ""
+        }
+
+        await self.config.clear()
+        await self.config.set(mutliSheet)
+
+        await ctx.send("Reset complete!")
+
+
+        userdata = await self.config.user(ctx.author).all()
+        dumpy = unescape(userdata)
+        dumpy= json.dumps(dumpy, indent = 4)
+        
+        sheetData = str(dumpy)
+
+        sheetOutput = io.BytesIO()
+        sheetOutput.write(bytes(sheetData, "utf-8"))
+        sheetOutput.seek(0)
+
+        await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
+        sheetOutput.close()
         
 
