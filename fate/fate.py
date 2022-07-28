@@ -228,38 +228,38 @@ class fate(commands.Cog):
 
 
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
-        await self.config.user(ctx.author).clear()
+        # await self.config.user(ctx.author).clear()
 
         userdata = await self.config.user(ctx.author).all()
 
-        await ctx.send("Reset complete!")
+        # await ctx.send("Reset complete!")
 
-        await ctx.send(userdata)
+        # await ctx.send(userdata)
 
-
-        ###
-        # if not ctx.message.attachments and importedJson == "":
-        #     return await ctx.send("No file or text found!")
-        # if importedJson != "":
-        #     if not str(f'"name":') in importedJson:
-        #         return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
-        #     else:
-        #         importedJson = ast.literal_eval(importedJson)
-        # if ctx.message.attachments:
-        #     file = ctx.message.attachments[0]
-        #     file_name = file.filename.lower()
-        #     if not file_name.endswith((".txt")):
-        #         return await ctx.send("Must be a .txt file!")
-
-        #     file = await file.read()
-        #     file = str(file).replace("\\r\\n", "")
-        #     file = bytes(file, 'utf-8')
-
-        #     importedJson = ast.literal_eval(file.decode('utf-8'))
-        #     importedJson = importedJson.decode('utf-8')
-        #     importedJson = ast.literal_eval(importedJson)
         
-        # userdata = await self.config.user(ctx.author).all()
+        ###
+        if not ctx.message.attachments and importedJson == "":
+            return await ctx.send("No file or text found!")
+        if importedJson != "":
+            if not str(f'"name":') in importedJson:
+                return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
+            else:
+                importedJson = ast.literal_eval(importedJson)
+        if ctx.message.attachments:
+            file = ctx.message.attachments[0]
+            file_name = file.filename.lower()
+            if not file_name.endswith((".txt")):
+                return await ctx.send("Must be a .txt file!")
+
+            file = await file.read()
+            file = str(file).replace("\\r\\n", "")
+            file = bytes(file, 'utf-8')
+
+            importedJson = ast.literal_eval(file.decode('utf-8'))
+            importedJson = importedJson.decode('utf-8')
+            importedJson = ast.literal_eval(importedJson)
+        
+        userdata["sheets"].update({importedJson["name"]: importedJson})
 
 
         await ctx.send(userdata.sheets)
