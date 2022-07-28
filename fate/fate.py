@@ -230,8 +230,9 @@ class fate(commands.Cog):
             "sheets": "",
             "activeSheetKey": ""
         }
-
-        await self.config.clear()
+        userdata = await self.config.user(ctx.author).all()
+        
+        userdata = mutliSheet
 
         await ctx.send("Reset complete!")
 
