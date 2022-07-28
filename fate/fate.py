@@ -237,12 +237,14 @@ class fate(commands.Cog):
 
         userdata = await self.config.user(ctx.author).all()
         sheetlist = ""
+
         for key in userdata["sheets"]:
             sheetlist = sheetlist + (str("\n" + key))
 
         if not ctx.message.attachments and importedJson == "":
-            await ctx.send("Active Character:" + userdata["activeSheetKey"] + "\n" + sheetlist)
-            return await ctx.send(sheetlist)
+            return await ctx.send("Active Character:" + userdata["activeSheetKey"] + "\n" + sheetlist)
         if importedJson != "":
             if importedJson in sheetlist:
-                userdata["activeSheetKey"].update(str(importedJson))
+                async with self.config.user(ctx.message.author).all() as userdata:
+                    userdata["activeSheetKey"] = importedJson
+                return
