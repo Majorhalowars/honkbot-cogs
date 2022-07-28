@@ -231,8 +231,8 @@ class fate(commands.Cog):
             "activeSheetKey": ""
         }
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
-        await self.config.user(ctx.author).all.clear()
-        await self.config.user(ctx.author).set(mutliSheet)
+        self.config.user(ctx.author).clear()
+        self.config.user(ctx.author).set_raw(mutliSheet)
 
         userdata = await self.config.user(ctx.author).all()
 
