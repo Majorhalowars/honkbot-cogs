@@ -232,7 +232,7 @@ class fate(commands.Cog):
         }
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
         self.config.user(ctx.author).clear()
-        self.config.user(ctx.author).set_raw(mutliSheet)
+        self.config.user(ctx.author).set_raw(value=mutliSheet)
 
         userdata = await self.config.user(ctx.author).all()
 
