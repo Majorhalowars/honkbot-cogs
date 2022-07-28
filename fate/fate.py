@@ -256,7 +256,7 @@ class fate(commands.Cog):
             sheetEmbed.set_author(name=f'Character List')
             sheetEmbed.set_thumbnail(url=f'{user.avatar_url}')
 
-            return await ctx.send("Active Character:" + userdata["activeSheetKey"] + "\n" + sheetlist)
+            return await ctx.send(embed=sheetEmbed)
         if importedJson != "":
             if importedJson in sheetlist:
                 
