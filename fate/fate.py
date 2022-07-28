@@ -230,7 +230,7 @@ class fate(commands.Cog):
         sheetlist = ""
         await ctx.send(userdata)
         for key in userdata["sheets"]:
-            sheetlist.append(str("\n" + key))
+            sheetlist = sheetlist + (str("\n" + key))
         await ctx.send(sheetlist)
         
 
