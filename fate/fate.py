@@ -252,7 +252,7 @@ class fate(commands.Cog):
             sheetlist = sheetlist + (str("\n" + key))
 
         if not ctx.message.attachments and importedJson == "":
-            sheetEmbed = discord.Embed(description=format("Active Character: " + userdata["activeSheetKey"] + "\n\n Avalible Characters:" + sheetlist),colour=ctx.author.color)
+            sheetEmbed = discord.Embed(description=format("Active Character: **" + userdata["activeSheetKey"] + "**\n\n Avalible Characters:" + sheetlist),colour=ctx.author.color)
             sheetEmbed.set_author(name=f'Character List')
             sheetEmbed.set_thumbnail(url=f'{user.avatar_url}')
 
