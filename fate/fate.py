@@ -236,7 +236,7 @@ class fate(commands.Cog):
         """Changes your active character!"""
 
         userdata = await self.config.user(ctx.author).all()
-
+        sheetlist = ""
         for key in userdata["sheets"]:
             sheetlist = sheetlist + (str("\n" + key))
 
