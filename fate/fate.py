@@ -227,8 +227,8 @@ class fate(commands.Cog):
         """debug command"""
 
         mutliSheet = {
-            "sheets": "",
-            "activeSheetKey": ""
+            "sheets": "1",
+            "activeSheetKey": "2"
         }
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
         await self.config.user(ctx.author).clear()
