@@ -34,7 +34,7 @@ class fate(commands.Cog):
             "activeSheetKey": ""
         }
 
-        self.config.clear()
+        self.config.clear_all()
         self.config.set(mutliSheet)
 
 
