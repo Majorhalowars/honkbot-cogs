@@ -230,11 +230,13 @@ class fate(commands.Cog):
             "sheets": "",
             "activeSheetKey": ""
         }
+
         userdata = await self.config.user(ctx.author).all()
         
-        userdata.clear()
-
-        self.config.user(ctx.author).set(mutliSheet)
+        for key in userdata:  
+            async with self.config.user(ctx.message.author).all() as userdata:
+                userdata.pop(key)
+        userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Reset complete!")
 
