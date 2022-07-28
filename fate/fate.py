@@ -261,7 +261,8 @@ class fate(commands.Cog):
             importedJson = importedJson.decode('utf-8')
             importedJson = ast.literal_eval(importedJson)
         
-        await self.config.user(ctx.message.author)["sheets"].update({importedJson["name"]: importedJson})
+        async with self.config.user(ctx.message.author).all() as userdata:
+                userdata["sheets"].update({importedJson["name"]: importedJson})
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send(userdata)
