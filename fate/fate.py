@@ -25,32 +25,25 @@ class fate(commands.Cog):
             "characterImage": ""
         } 
 
-        mutliSheetLayer = {
+        mutliSheet = {
             "sheets": "",
             "activeSheetKey": ""
         }
 
-        self.config.register_user(**mutliSheetLayer)
+        self.config.register_user(**mutliSheet)
 
 
     @commands.command(name="clearsheet")
     async def wipeSheet(self, ctx):
         """Wipes your sheet, squeaky clean."""
         ##DEPRECEATED, REPLACE WITH "!remove SHEETKEY"
-        emptySheet = {
-            "name": "",
-            "description": "",
-            "skillList": [],
-            "aspectList": [],
-            "stuntList": [],
-            "characterImage": ""
-        }
-        
-        userdata = await self.config.user(ctx.author).all()
 
-        for key in userdata:
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata[key] = emptySheet.get(key)
+        mutliSheet = {
+            "sheets": "",
+            "activeSheetKey": ""
+        }
+
+        self.config.set(mutliSheet)
 
 
         userdata = await self.config.user(ctx.author).all()
@@ -94,10 +87,6 @@ class fate(commands.Cog):
        
         await ctx.send(embed=sheetEmbed)
 
-
-
-        
-
     @commands.command(name="fateroll")
     async def fudgedice(self, ctx , *, skill: Optional[str] = ""):
         """Rolls 1d3, and write a skill after to do a skill roll."""
@@ -138,7 +127,6 @@ class fate(commands.Cog):
             if not skillTarget:
                 return await ctx.send("wawawaawa fuck weezer i hate them!!!!")
             
-
     @commands.command(name="importsheet")
     async def completeimport(self, ctx, *, importedJson: Optional[str] = ""):
         """Imports the export from the site!"""
@@ -244,9 +232,4 @@ class fate(commands.Cog):
         await ctx.send("Exported! Copy this into the site to edit it, or just to share with someone else.",file=discord.File(sheetOutput, "export.json"))
         sheetOutput.close()
         
-    @commands.command(name="debug")
-    async def debugConfig(self,ctx):
-        """Debug command"""
 
-        userdata = await self.config.user(ctx.author).all()
-        await ctx.send(userdata)
