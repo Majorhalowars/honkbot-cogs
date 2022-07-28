@@ -14,10 +14,10 @@ class fate(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=255140000)
+        self.config = Config.get_conf(self, identifier=2551400)
 
         mutliSheet = {
-            "sheets": "",
+            "sheets": {},
             "activeSheetKey": ""
         }
 
@@ -223,21 +223,46 @@ class fate(commands.Cog):
         sheetOutput.close()
 
     @commands.command(name="debug")
-    async def debugcommand(self, ctx):
+    async def debugcommand(self, ctx, *, importedJson: Optional[str] = ""):
         """debug command"""
 
-        mutliSheet = {
-            "sheets": "",
-            "activeSheetKey": ""
-        }
+
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
         await self.config.user(ctx.author).clear()
-        await self.config.user(ctx.author).set(mutliSheet)
 
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Reset complete!")
 
         await ctx.send(userdata)
+
+
+        ###
+        # if not ctx.message.attachments and importedJson == "":
+        #     return await ctx.send("No file or text found!")
+        # if importedJson != "":
+        #     if not str(f'"name":') in importedJson:
+        #         return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
+        #     else:
+        #         importedJson = ast.literal_eval(importedJson)
+        # if ctx.message.attachments:
+        #     file = ctx.message.attachments[0]
+        #     file_name = file.filename.lower()
+        #     if not file_name.endswith((".txt")):
+        #         return await ctx.send("Must be a .txt file!")
+
+        #     file = await file.read()
+        #     file = str(file).replace("\\r\\n", "")
+        #     file = bytes(file, 'utf-8')
+
+        #     importedJson = ast.literal_eval(file.decode('utf-8'))
+        #     importedJson = importedJson.decode('utf-8')
+        #     importedJson = ast.literal_eval(importedJson)
+        
+        # userdata = await self.config.user(ctx.author).all()
+
+        userdata.multiSheet
+
+        await ctx.send(userdata.multiSheet.sheets)
         
 
