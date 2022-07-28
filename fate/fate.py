@@ -261,8 +261,7 @@ class fate(commands.Cog):
         
         # userdata = await self.config.user(ctx.author).all()
 
-        userdata.multiSheet
 
-        await ctx.send(userdata.multiSheet.sheets)
+        await ctx.send(userdata.sheets)
         
 
