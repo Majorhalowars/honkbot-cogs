@@ -231,12 +231,8 @@ class fate(commands.Cog):
             "activeSheetKey": ""
         }
 
-        userdata = await self.config.user(ctx.author).all()
-        
-        for key in userdata:  
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata.clear_raw(key)
-                
+        await self.config.user(ctx.author).all().clear_raw()
+
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Reset complete!")
