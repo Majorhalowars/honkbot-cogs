@@ -262,6 +262,6 @@ class fate(commands.Cog):
         userdata["sheets"].update({importedJson["name"]: importedJson})
 
 
-        await ctx.send(userdata.sheets)
+        await ctx.send(userdata["sheets"])
         
 
