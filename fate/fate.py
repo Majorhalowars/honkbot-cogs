@@ -14,7 +14,7 @@ class fate(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=66617465)
+        self.config = Config.get_conf(self, identifier=255140000)
 
         mutliSheet = {
             "sheets": "",
@@ -227,8 +227,8 @@ class fate(commands.Cog):
         """debug command"""
 
         mutliSheet = {
-            "sheets": "1",
-            "activeSheetKey": "2"
+            "sheets": "",
+            "activeSheetKey": ""
         }
         ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
         await self.config.user(ctx.author).clear()
