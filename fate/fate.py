@@ -155,6 +155,7 @@ class fate(commands.Cog):
 
         async with self.config.user(ctx.message.author).all() as userdata:
                 userdata["sheets"].update({importedJson["name"]: importedJson})
+                userdata["activeSheetKey"] = importedJson["name"]
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Sheet Imported!")
