@@ -171,6 +171,7 @@ class fate(commands.Cog):
                 break
         if aspectFound == False:
             await ctx.send("No aspect found matching that name!")
+            return
 
 
         sheetEmbed = discord.Embed(description=f'{str(aspectDesc)}',colour=ctx.author.color)
@@ -198,6 +199,7 @@ class fate(commands.Cog):
                 break
         if stuntFound == False:
             await ctx.send("No stunt found matching that name!")
+            return
 
 
         sheetEmbed = discord.Embed(description=f'{str(stuntDesc)}',colour=ctx.author.color)
