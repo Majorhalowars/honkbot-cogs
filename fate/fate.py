@@ -43,6 +43,7 @@ class fate(commands.Cog):
     async def sheet(self, ctx):
         """Displays your current sheet in a snazzy embed."""
         userdata = await self.config.user(ctx.author).all()
+        userdata = userdata["sheets"][userdata['activeSheetKey']]
         aspectList = userdata["aspectList"]
         stuntList = userdata["stuntList"]
         skillList = userdata["skillList"]
@@ -144,9 +145,8 @@ class fate(commands.Cog):
         
         userdata = await self.config.user(ctx.author).all()
 
-        for key in userdata:  
-            async with self.config.user(ctx.message.author).all() as userdata:
-                userdata[key] = importedJson.get(key)
+        async with self.config.user(ctx.message.author).all() as userdata:
+                userdata["sheets"].update({importedJson["name"]: importedJson})
         userdata = await self.config.user(ctx.author).all()
 
         await ctx.send("Sheet Imported!")
@@ -223,49 +223,14 @@ class fate(commands.Cog):
         sheetOutput.close()
 
     @commands.command(name="debug")
-    async def debugcommand(self, ctx, *, importedJson: Optional[str] = ""):
+    async def debugcommand(self, ctx):
         """debug command"""
 
-
-        ###mental note, do self.config.user(ctx.author).multiSheet.sheet.set() to modify sheets
-        # await self.config.user(ctx.author).clear()
-
         userdata = await self.config.user(ctx.author).all()
-
-        # await ctx.send("Reset complete!")
-
+        sheetlist = ""
         await ctx.send(userdata)
-
-        
-        ###
-        if not ctx.message.attachments and importedJson == "":
-            await ctx.send(userdata)
-            await ctx.send(userdata["sheets"]) 
-            return
-        if importedJson != "":
-            if not str(f'"name":') in importedJson:
-                return await ctx.send("Woah there buddy, that's not a sheet you pasted!")
-            else:
-                importedJson = ast.literal_eval(importedJson)
-        if ctx.message.attachments:
-            file = ctx.message.attachments[0]
-            file_name = file.filename.lower()
-            if not file_name.endswith((".txt")):
-                return await ctx.send("Must be a .txt file!")
-
-            file = await file.read()
-            file = str(file).replace("\\r\\n", "")
-            file = bytes(file, 'utf-8')
-
-            importedJson = ast.literal_eval(file.decode('utf-8'))
-            importedJson = importedJson.decode('utf-8')
-            importedJson = ast.literal_eval(importedJson)
-        
-        async with self.config.user(ctx.message.author).all() as userdata:
-                userdata["sheets"].update({importedJson["name"]: importedJson})
-        userdata = await self.config.user(ctx.author).all()
-
-        await ctx.send(userdata)
-        await ctx.send(userdata["sheets"])
+        for key in userdata["sheets"]:
+            sheetlist.append(str("\n" + key))
+        await ctx.send(sheetlist)
         
 
