@@ -155,8 +155,8 @@ class fate(commands.Cog):
     async def viewAspect(self, ctx, *, importedJson: Optional[str] = ""):
         """View an aspect's description. Case sensitive."""
 
-        user = ctx.author
         userdata = await self.config.user(ctx.author).all()
+        userdata = userdata["sheets"][userdata['activeSheetKey']]
         aspectList = userdata["aspectList"]
         aspectDesc = ""
 
@@ -178,8 +178,8 @@ class fate(commands.Cog):
     async def viewStunt(self, ctx, *, importedJson: Optional[str] = ""):
         """View a stunt's description. Case sensitive."""
 
-        user = ctx.author
         userdata = await self.config.user(ctx.author).all()
+        userdata = userdata["sheets"][userdata['activeSheetKey']]
         stuntList = userdata["stuntList"]
         stuntDesc = ""
 
@@ -208,6 +208,8 @@ class fate(commands.Cog):
         """Makes an export of your sheet."""
 
         userdata = await self.config.user(ctx.author).all()
+        userdata = userdata["sheets"][userdata['activeSheetKey']]
+        
         dumpy = unescape(userdata)
         dumpy= json.dumps(dumpy, indent = 4)
         
@@ -247,4 +249,7 @@ class fate(commands.Cog):
             if importedJson in sheetlist:
                 async with self.config.user(ctx.message.author).all() as userdata:
                     userdata["activeSheetKey"] = importedJson
+                await ctx.send("Active sheet changed to " + userdata["activeSheetKey"] + "!")
                 return
+        else:
+            return await ctx.send("(im really sorry it's case sensitive, just do !tf and copy the name you want)")
