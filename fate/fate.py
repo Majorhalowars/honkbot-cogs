@@ -232,7 +232,6 @@ class fate(commands.Cog):
         }
 
         await self.config.clear()
-        await self.config.set(mutliSheet)
 
         await ctx.send("Reset complete!")
 
