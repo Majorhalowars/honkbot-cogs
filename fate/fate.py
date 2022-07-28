@@ -182,15 +182,19 @@ class fate(commands.Cog):
         userdata = await self.config.user(ctx.author).all()
         userdata = userdata["sheets"][userdata['activeSheetKey']]
         stuntList = userdata["stuntList"]
-        stuntDesc = ""
+        stuntFound = False
 
         if searchedStunt == "":
             return await ctx.send("Provide a stunt to search when using the command")
         
-        if searchedStunt in stuntList:
-            stuntDesc = stuntList[searchedStunt]["stuntDescription"]
-        else:
-            return await ctx.send("No stunt found matching that name!")
+        for stunt in stuntList:
+            if searchedStunt == stunt["stuntName"]:
+                stuntDesc = stuntList[searchedStunt]["stuntDescription"]
+                stuntFound = True
+                return
+        if stuntFound == False:
+            await ctx.send("No stunt found matching that name!")
+
 
         sheetEmbed = discord.Embed(description=f'{str(stuntDesc)}',colour=ctx.author.color)
         sheetEmbed.set_author(name=f'{searchedStunt}')
