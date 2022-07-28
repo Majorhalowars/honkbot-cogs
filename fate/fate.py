@@ -1,5 +1,7 @@
 from logging.config import IDENTIFIER
 import string
+
+from jmespath import search
 from redbot.core import checks, Config, commands, bot
 import discord
 import ast
@@ -152,7 +154,7 @@ class fate(commands.Cog):
         await ctx.send("Sheet Imported!")
 
     @commands.command(name="aspect")
-    async def viewAspect(self, ctx, *, importedJson: Optional[str] = ""):
+    async def viewAspect(self, ctx, *, searchedAspect: Optional[str] = ""):
         """View an aspect's description. Case sensitive."""
 
         userdata = await self.config.user(ctx.author).all()
@@ -160,22 +162,22 @@ class fate(commands.Cog):
         aspectList = userdata["aspectList"]
         aspectDesc = ""
 
-        if importedJson == "":
-            return await ctx.send("You forgot the aspect! Enter an aspect name from your sheet.")
-        for aspect in aspectList:
-            if importedJson == str(aspect["aspectName"]):
-                aspectDesc = str(aspect["aspectDescription"])
-        if aspectDesc == "":
-            return await ctx.send("No aspect found! Make sure you sent it right!")
+        if searchedAspect == "":
+            return await ctx.send("Provide an aspect to search when using the command")
+        
+        if searchedAspect in aspectList:
+            aspectDesc = aspectList[searchedAspect]["aspectDescription"]
+        else:
+            return await ctx.send("No aspect found matching that name!")
 
         sheetEmbed = discord.Embed(description=f'{str(aspectDesc)}',colour=ctx.author.color)
-        sheetEmbed.set_author(name=f'{importedJson}')
+        sheetEmbed.set_author(name=f'{searchedAspect}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
 
         await ctx.send(embed=sheetEmbed)
     
     @commands.command(name="stunt")
-    async def viewStunt(self, ctx, *, importedJson: Optional[str] = ""):
+    async def viewStunt(self, ctx, *, searchedStunt: Optional[str] = ""):
         """View a stunt's description. Case sensitive."""
 
         userdata = await self.config.user(ctx.author).all()
@@ -183,16 +185,16 @@ class fate(commands.Cog):
         stuntList = userdata["stuntList"]
         stuntDesc = ""
 
-        if importedJson == "":
-            return await ctx.send("You forgot the stunt! Enter a stunt name from your sheet.")
-        for stunt in stuntList:
-            if importedJson == str(stunt["stuntName"]):
-                stuntDesc = str(stunt["stuntDescription"])
-        if stuntDesc == "":
-            return await ctx.send("No stunt found! Make sure you sent it right!")
+        if searchedStunt == "":
+            return await ctx.send("Provide a stunt to search when using the command")
+        
+        if searchedStunt in stuntList:
+            stuntDesc = stuntList[searchedStunt]["stuntDescription"]
+        else:
+            return await ctx.send("No stunt found matching that name!")
 
         sheetEmbed = discord.Embed(description=f'{str(stuntDesc)}',colour=ctx.author.color)
-        sheetEmbed.set_author(name=f'{importedJson}')
+        sheetEmbed.set_author(name=f'{searchedStunt}')
         sheetEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
 
         await ctx.send(embed=sheetEmbed)
