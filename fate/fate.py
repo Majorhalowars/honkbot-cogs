@@ -103,6 +103,7 @@ class fate(commands.Cog):
         die(roll4)
         user = ctx.author
         userdata = await self.config.user(ctx.author).all()
+        userdata = userdata["sheets"][userdata['activeSheetKey']]
         skillList = userdata["skillList"]
         skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill.lower()), False)
         
