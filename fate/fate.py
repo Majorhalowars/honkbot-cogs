@@ -124,7 +124,11 @@ class fate(commands.Cog):
                 return await ctx.send(embed=rollEmbed)
 
             if not skillTarget:
-                return await ctx.send("wawawaawa fuck weezer i hate them!!!!")
+                rollEmbed = discord.Embed(description=format("Rolling with a skill of 0" + "\nRolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1]), colour=ctx.author.color)
+                rollEmbed.add_field(name="Total:", value=f'{str(roll1[0]+roll2[0]+roll3[0]+roll4[0]) + " + 0" + " = " + str(roll1[0]+roll2[0]+roll3[0]+roll4[0]+0)}', inline=True)
+                rollEmbed.set_author(name=f'{userdata["name"]} rolled for {skill.capitalize()}')
+                rollEmbed.set_thumbnail(url=f'{userdata["characterImage"]}')
+                return await ctx.send(embed=rollEmbed)
             
     @commands.command(name="importsheet")
     async def completeimport(self, ctx, *, importedJson: Optional[str] = ""):
