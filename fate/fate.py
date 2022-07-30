@@ -113,11 +113,12 @@ class fate(commands.Cog):
             userdata = userdata["sheets"][userdata['activeSheetKey']]
             skillList = userdata["skillList"]
             skillTarget = next((skillDict for skillDict in skillList if skillDict['skillName'].lower() == skill.lower()), False)
-        except KeyError:
+        except:
             return await ctx.send(str(user.name) + " Rolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1])
+        
         if skill == "":
             return await ctx.send(str(user.name) + " Rolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1])
-            
+
         if skill != "":
             if skillTarget:
                 rollEmbed = discord.Embed(description=format("Rolling with a skill of " + str(skillTarget["skillLevel"]) + "\nRolled: " + roll1[1] + " " + roll2[1] + " " + roll3[1] + " " + roll4[1]), colour=ctx.author.color)
